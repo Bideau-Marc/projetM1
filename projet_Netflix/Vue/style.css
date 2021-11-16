@@ -1,0 +1,512 @@
+.film {
+    height: 60%;
+    background-image: url("https://www.realite-virtuelle.com/wp-content/uploads/2021/08/Dune-3.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.1)
+}
+
+.pitch-title {
+	font-size: 3em;
+	margin: 10px;
+	font-weight: 700;
+}
+
+.pitch-subtitle {
+	margin: 10px;
+}
+.btn {
+	font-size: 14px;
+	letter-spacing: 1.9px;
+	font-weight: 400;
+	margin: 10px;
+	padding: 12px 2em;
+	color: #fff;
+	background-color: #e50914;
+	cursor: pointer;
+	text-decoration: none;
+	vertical-align: middle;
+	font-family: Arial, sans-serif;
+	border-radius: 2px;
+	user-select: none;
+	text-align: center;
+	border: none;
+}
+
+nav .signin:hover,
+.btn:hover {
+	background: #f40612;
+}
+/* CSS VARIABLES */
+:root {
+    --primary: #141414;
+    --light: #F3F3F3;
+    --dark: 	#686868;
+  }
+  
+  html, body {
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary);
+    color: var(--light);
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    line-height: 1.4;
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  
+  h1 {
+    padding-top: 60px;  
+  }
+  
+  .wrapper {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* HEADER */
+  header {
+    padding: 20px 20px 0 20px;
+    position: fixed;
+    top: 0;
+    display: grid;  
+    grid-gap:5px;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-areas: 
+     "nt mn mn sb . . . "; 
+    background-color: var(--primary);
+    width: 100%;
+    margin-bottom: 0px;  
+  }
+  
+  .netflixLogo {
+    grid-area: nt;
+    object-fit: cover;
+    width: 100px;
+    max-height: 100%;
+    
+    padding-left: 30px;
+    padding-top: 0px;  
+  }
+  
+  .netflixLogo img {  
+    height: 35px;     
+  }
+  
+  #logo {
+    color: #E50914;  
+    margin: 0; 
+    padding: 0; 
+  }
+  
+  
+  .main-nav {
+    grid-area: mn;
+    padding: 0 30px 0 20px;
+  }
+  
+  .main-nav a {
+    color: var(--light);
+    text-decoration: none;
+    margin: 5px;  
+  }
+  
+  .main-nav a:hover {
+    color: var(--dark);
+  }
+  
+  .sub-nav {
+    grid-area: sb;
+    padding: 0 40px 0 40px;
+  }
+  
+  .sub-nav a {
+    color: var(--light);
+    text-decoration: none;
+    margin: 5px;
+  }
+  
+  .sub-nav a:hover {
+    color: var(--dark);
+  }
+  
+  
+  /* MAIN CONTIANER */
+  .main-container {
+    padding: 50px;
+  }
+  
+  .box {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
+  }
+  
+  .box a {
+    transition: transform .3s;  
+  }
+  
+  .box a:hover {
+    transition: transform .3s;
+    -ms-transform: scale(1.4);
+    -webkit-transform: scale(1.4);  
+    transform: scale(1.4);
+  }
+  
+  .box img {
+    border-radius: 2px;
+  }
+  
+  /* LINKS */
+  .link {
+    padding: 50px;
+  }
+  
+  .sub-links ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .sub-links a {
+    color: var(--dark);
+    text-decoration: none;
+  }
+  
+  .sub-links a:hover {
+    color: var(--dark);
+    text-decoration: underline;
+  }
+  
+  .logos a{
+    padding: 10px;
+  }
+  
+  .logo {
+    color: var(--dark);
+  }
+  
+  
+  /* FOOTER */
+  footer {
+    padding: 20px;
+    text-align: center;
+    color: var(--dark);
+    margin: 10px;
+  }
+  
+  /* MEDIA QUERIES */
+  
+  @media(max-width: 900px) {
+  
+    header {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas: 
+      "nt nt nt  .  .  . sb . . . "
+      "mn mn mn mn mn mn  mn mn mn mn";
+    }
+  
+    .box {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(4, minmax(100px, 1fr));
+    }
+  
+  }
+  
+  @media(max-width: 700px) {
+  
+    header {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas: 
+      "nt nt nt  .  .  . sb . . . "
+      "mn mn mn mn mn mn  mn mn mn mn";
+    }
+  
+    .box {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(3, minmax(100px, 1fr));
+    }
+  
+    .sub-links ul {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+     
+  }
+  
+  @media(max-width: 500px) {
+  
+    .wrapper {
+      font-size: 15px;
+    }
+  
+    header {
+      margin: 0;
+      padding: 20px 0 0 0;
+      position: static;
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-areas: 
+      "nt"    
+      "mn"
+      "sb";
+      text-align: center;
+    }
+  
+    .netflixLogo {
+      max-width: 100%;
+      margin: auto;
+      padding-right: 20px;
+    }
+  
+    .main-nav {
+      display: grid;
+      grid-gap: 0px;
+      grid-template-columns: repeat(1, 1fr);
+      text-align: center;
+    }
+  
+    h1 {
+      text-align: center;
+      font-size: 18px;
+    }
+  
+   
+  
+    .box {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(1, 1fr);
+      text-align: center;    
+    }
+  
+    .box a:hover {
+      transition: transform .3s;
+      -ms-transform: scale(1);
+      -webkit-transform: scale(1);  
+      transform: scale(1.2);
+    }
+  
+    .logos {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      text-align: center;
+    }
+  
+    .sub-links ul {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(1, 1fr);
+      text-align: center;
+      font-size: 15px;
+    }
+}
+.Button {
+    background: transparent;
+    display: flex;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid rgba(245, 245, 241, 0.2);
+    border-radius: 44px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: border 0.125s ease, background 0.125s ease;
+}
+.Hero .content .button-wrapper .Button:first-child {
+    margin-right: 10px;
+}
+
+.Button[data-primary=true] {
+    border: 2px solid #e50914;
+}
+
+/* Page Connexion */
+
+.formm h1 {
+	margin-bottom: 20px;
+}
+
+.formm {
+	width: 100%;
+	margin-bottom: 40px;
+}
+
+.formm .info {
+	padding: 5px 0;
+	/* margin-bottom: 20px; */
+}
+
+.formm .info .email {
+	margin-bottom: 30px;
+	width: 90%;
+	height: 25px;
+	border-radius: 5px;
+	border: none;
+	padding: 10px;
+	font-size: inherit;
+}
+
+.formm .btnCo {
+	margin-bottom: 10px;
+	width: 100%;
+}
+input[type=email] {
+	background: #343434;
+}
+.help {
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.8rem;
+}
+
+.help a {
+	color: #999;
+}
+
+.help a:hover {
+	text-decoration: underline;
+}
+.showcase-content {
+	position: relative;
+    border-radius: 5px;
+	z-index: 2;
+	width: 450px;
+	height: auto;
+	background: rgb(0, 0, 0, 0.65);
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	text-align: left;
+	padding: 60px 65px;
+    margin-bottom: 65px;
+}
+.showcase {
+	width: 100%;
+	height: 100vh;
+	background: url('https://imgsrc.cineserie.com/2017/02/Filmandclapboard.jpg?ver=1') center center/cover;
+    background-repeat: no-repeat;
+}
+
+.showcase::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background: rgba(0, 0, 0, 0.4);
+	box-shadow: inset 30px 10px 150px #000000;
+}
+.btn-primary {
+	width: 90%;
+	height: 50px;
+	border-radius: 5px;
+	background: red;
+	color: #fff;
+	font-size: inherit;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
+	outline: none;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+}
+.ftr-content {
+	margin-left: 10%;
+	padding-top: 20px;
+	font-size: 1em;
+}
+
+.ftr-content a {
+	color: #999;
+}
+
+.ftr-content a:hover {
+	text-decoration: underline;
+}
+.contact {
+	margin-bottom: 30px;
+}
+
+.contact a:hover {
+	text-decoration: underline;
+}
+.signup {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.signup a, p {
+	margin-right: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 1.2em;
+}
+/* Page reserver */
+.color{
+ color: turquoise;
+}
+.btnPopup{
+    background-color: orangered;
+    padding: 1em 2em;
+    cursor: pointer;
+}
+.btnPopup:hover{
+    background-color: rgba(0,0 ,0 , 0.5);
+}
+.overlay {
+    position: fixed;
+    left: 0px;
+    top:0px;
+    background-color: rgba(0,0 ,0 , 0.5);
+    width: 100%;
+    height: 100%;
+    display:none;
+}
+.popup{
+    margin: 10% auto;
+    width : 70%;
+    height: 50%;
+    background-image: url("https://www.realite-virtuelle.com/wp-content/uploads/2021/08/Dune-3.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    border-radius: 5px;
+}
+.btnClose {
+    float: right;
+    font-size:16pt;
+    cursor: pointer;
+    color: rgb(26, 26, 26);
+}
+.bottom{
+    bottom: 0;
+}
