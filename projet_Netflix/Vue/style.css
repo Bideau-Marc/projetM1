@@ -409,7 +409,7 @@ input[type=email] {
 .showcase {
 	width: 100%;
 	height: 100vh;
-	background: url('https://imgsrc.cineserie.com/2017/02/Filmandclapboard.jpg?ver=1') center center/cover;
+	background: url('../assets/filmclap.webp') center center/cover;
     background-repeat: no-repeat;
 }
 
@@ -520,4 +520,7 @@ input[type=email] {
   border: solid;
   border-radius: 5px;
   border-color: rgba(255, 255, 255, 0.2);
+}
+a{
+  text-decoration:none; 
 }
