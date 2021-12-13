@@ -521,6 +521,22 @@ input[type=email] {
   border-radius: 5px;
   border-color: rgba(255, 255, 255, 0.2);
 }
+.taille{
+  max-width: 50%;
+}
+.input-taille{
+  width: 30%;  
+}
 a{
-  text-decoration:none; 
+  text-decoration:none;
+  border-radius: 5px;
+}
+.center{
+  margin-left: 42%;
+}
+.top{
+  margin-top: 40px;
+}
+.flooter{
+  color: white;
 }

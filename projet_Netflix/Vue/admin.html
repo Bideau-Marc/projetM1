@@ -1,0 +1,82 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Netflix</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <header>
+      <div class="netflixLogo">
+        <a id="logo" href="accueil.html#home"><img src="../assets/flixnet.png" alt="Logo Image"></a>
+      </div>      
+      <nav class="main-nav">                
+        <a href="accueil.html">Films/Séries</a>
+        <a href="reserver_tout.html">Réservation</a>
+        <a href=""></a>
+      </nav>
+      <nav class="sub-nav">
+        <a href="#"><i class="fas fa-search sub-nav-logo"></i></a>
+        <a href="#"><i class="fas fa-bell sub-nav-logo"></i></a>
+        <a href="#">Account</a>        
+      </nav>      
+    </header>
+    <!-- END OF HEADER -->
+    
+    <!-- MAIN CONTAINER -->
+    <section class="main-container" >
+        <div>
+            <section class="film">
+                <input class="pitch-title commentaire-fond taille" value="Dune"><br>
+                <textarea rows="5" cols="50" class="pitch-subtitle commentaire-fond taille">Description</textarea><br>
+                <a href=""><button class="btn">Enregistrer ⬇️</button></a>
+                <a href=""><button class="btn">Supprimer ❌</button></a><br>
+                <a href="watch.html"><button class="btn">Reagarder ►</button></a>
+                <a href="reserver.html"><button class="btn">Réserver 📅</button></a>
+            </section>
+        </div>
+        
+        <div class="location" id="home" >
+            <h1 id="home">Date réservation</h1>
+            <div class="box">
+                <a onclick="affichageResvesation('a1')" id="a1">Lundi 15 novembre 15h00</a>
+                <a onclick="affichageResvesation('a1')" id="a1">Lundi 15 decembre 16h00</a>
+                <a onclick="affichageResvesation('a3')" id="a3">Lundi 15 janvier 17h00</a>
+                <a onclick="affichageResvesation('a4')" id="a4">Lundi 15 février 10h00</a>
+                <a onclick="affichageResvesation('a5')" id="a5">Lundi 15 avril 14h00</a>
+                <a onclick="affichageResvesation('a6')" id="a6">Lundi 15 juin 20h00</a>
+            </div>
+            <div id="listeReservation" hidden>
+                <h1 id="">Personne ayant réserver</h1>
+                <input class="commentaire-fond input-taille" value="Lundi 15 novembre 15h00"><a id="">❌ Surrpimer séance</a><br>
+                <div class="box top">
+                    <a id=""><p>Marc bideau</p>❌</a>
+                    <a id=""><p>Marc bido</p>❌</a>
+                    <a id=""><p>Marc bidau</p>❌</a>
+                    <a id=""><p>Marc bideaux</p>❌</a>
+                    <a id=""><p>Marc bidaux</p>❌</a>
+                    <a id=""><p>Marc bid0</p>❌</a>
+                </div>
+            </div>
+            
+            <a href=""><button class="btn center top">Enregistrer ⬇️</button></a>
+        </div>
+    </section>
+
+    <footer>
+      <a href="./contact.html" class="flooter">Contact ☎️</a>
+    </footer>
+  </div>
+</body>
+</html>
+<script>
+    function affichageResvesation(a)
+    {
+      document.getElementById("listeReservation").hidden = false;
+      document.getElementById(a).style.backgroundColor = "#ffffff27";
+    }
+  </script>
