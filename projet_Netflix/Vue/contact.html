@@ -12,6 +12,7 @@
 
     <div class="showcase-content">
         <div class="formm">
+            <span id="btnClose" onclick="closeContact()" class="btnClose">❌</span>
             <form>
                 <h2>Contact administrateur</h2>
                 <div class="info">
@@ -31,5 +32,8 @@
 </div>
 </body>
 </html>
-
-
+<script>
+    function closeContact() {
+        window.history.back();
+    }
+</script>
