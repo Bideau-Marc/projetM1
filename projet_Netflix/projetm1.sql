@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 11 jan. 2022 à 14:21
+-- Généré le : mar. 11 jan. 2022 à 15:26
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -44,6 +44,58 @@ INSERT INTO `categorie` (`id`, `nom`) VALUES
 (3, 'Humour'),
 (4, 'Horreur'),
 (5, 'Amour');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commentaire`
+--
+
+DROP TABLE IF EXISTS `commentaire`;
+CREATE TABLE IF NOT EXISTS `commentaire` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_film` int(11) DEFAULT NULL,
+  `id_serie` int(11) DEFAULT NULL,
+  `commentaire` text NOT NULL,
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `commentaire`
+--
+
+INSERT INTO `commentaire` (`id`, `id_film`, `id_serie`, `commentaire`, `id_user`) VALUES
+(1, 1, NULL, 'LE film est plus bien.', 2),
+(2, NULL, 2, 'SUPER Série', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `episode`
+--
+
+DROP TABLE IF EXISTS `episode`;
+CREATE TABLE IF NOT EXISTS `episode` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_serie` int(11) NOT NULL COMMENT 'id de la série',
+  `nom` varchar(255) NOT NULL,
+  `lien_video` text NOT NULL,
+  `lien_image` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `episode`
+--
+
+INSERT INTO `episode` (`id`, `id_serie`, `nom`, `lien_video`, `lien_image`) VALUES
+(1, 2, 'Episode 1', '', ''),
+(2, 2, 'Episode 2', '', ''),
+(3, 2, 'Episode 3', '', ''),
+(4, 2, 'Episode 4', '', ''),
+(5, 2, 'Episode 5', '', ''),
+(6, 2, 'Episode 6', '', '');
 
 -- --------------------------------------------------------
 

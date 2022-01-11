@@ -546,6 +546,7 @@ input[type=email] {
 /*Commentaire*/
 .commentaire{
   margin-left: 20px;
+  width: 90%;
 }
 .commentaire-fond-sansMargin{
   border-width: 4px;
@@ -573,6 +574,7 @@ a{
   text-decoration:none;
   border-radius: 5px;
   cursor: pointer;
+  color: white;
 }
 .center{
   margin-left: 42%;
@@ -580,9 +582,19 @@ a{
 .top{
   margin-top: 40px;
 }
+.espacebas{
+  margin-bottom: 10px;
+}
 .flooter{
   color: white;
 }
 .test1{
   background-image: url('../assets/stranger-things-S03.jpg');
+}
+.bottomdiv{
+  position: relative;
+}
+.bottom{
+  position: absolute;
+  bottom: 0;
 }
