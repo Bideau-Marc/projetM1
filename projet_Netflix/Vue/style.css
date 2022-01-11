@@ -1,6 +1,6 @@
 .film {
   height: 60%;
-  background-image: url("https://www.realite-virtuelle.com/wp-content/uploads/2021/08/Dune-3.jpg");
+  background-image: url("../assets/Dune.jpg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom right;
@@ -17,6 +17,21 @@
 
 .pitch-subtitle {
 	margin: 10px;
+}
+.btn-delete {
+	font-size: 14px;
+	letter-spacing: 1.9px;
+	font-weight: 400;
+	color: #fff;
+	background-color: #ffffff27;
+	cursor: pointer;
+	text-decoration: none;
+	vertical-align: middle;
+	font-family: Arial, sans-serif;
+	border-radius: 2px;
+	user-select: none;
+	text-align: center;
+	border: none;
 }
 .btn {
 	font-size: 14px;
@@ -74,7 +89,7 @@ h1 {
 
 /* HEADER */
 header {
-  padding: 20px 20px 0 20px;
+  padding: 20px 20px 20px 20px;
   position: fixed;
   top: 0;
   display: grid;  
@@ -142,6 +157,7 @@ header {
 /* MAIN CONTIANER */
 .main-container {
   padding: 50px;
+  margin-top: 30px;
 }
 
 .box {
@@ -473,15 +489,27 @@ input[type=email] {
 }
 /* Page reserver */
 .color{
- color: turquoise;
+ color: #ffee05;
 }
 .btnPopup{
-  background-color: orangered;
-  padding: 1em 2em;
-  cursor: pointer;
+  font-size: 14px;
+	letter-spacing: 1.9px;
+	font-weight: 400;
+  margin-top: 20px;
+	padding: 12px 2em;
+	color: #fff;
+	background-color: #e50914;
+	cursor: pointer;
+	text-decoration: none;
+	vertical-align: middle;
+	font-family: Arial, sans-serif;
+	border-radius: 2px;
+	user-select: none;
+	text-align: center;
+	border: none;
 }
 .btnPopup:hover{
-  background-color: rgba(0,0 ,0 , 0.5);
+  background: #f40612;
 }
 .overlay {
   position: fixed;
@@ -496,13 +524,18 @@ input[type=email] {
   margin: 10% auto;
   width : 70%;
   height: 50%;
-  background-image: url("https://www.realite-virtuelle.com/wp-content/uploads/2021/08/Dune-3.jpg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom right;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 1em;
   border-radius: 5px;
+}
+.dune{
+  background-image: url("../assets/Dune.jpg");
+}
+.ajouterfilm{
+  background-image: url("../assets/filmclap.webp");
 }
 .btnClose {
   float: right;
@@ -513,6 +546,12 @@ input[type=email] {
 /*Commentaire*/
 .commentaire{
   margin-left: 20px;
+}
+.commentaire-fond-sansMargin{
+  border-width: 4px;
+  border: solid;
+  border-radius: 5px;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 .commentaire-fond{
   margin-top: 20px;
@@ -527,9 +566,13 @@ input[type=email] {
 .input-taille{
   width: 30%;  
 }
+.input-popup{
+  width: 50%;
+}
 a{
   text-decoration:none;
   border-radius: 5px;
+  cursor: pointer;
 }
 .center{
   margin-left: 42%;

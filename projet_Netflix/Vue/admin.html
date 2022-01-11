@@ -29,41 +29,36 @@
     
     <!-- MAIN CONTAINER -->
     <section class="main-container" >
-        <div>
-            <section class="film">
-                <input class="pitch-title commentaire-fond taille" value="Dune"><br>
-                <textarea rows="5" cols="50" class="pitch-subtitle commentaire-fond taille">Description</textarea><br>
-                <a href=""><button class="btn">Enregistrer ⬇️</button></a>
-                <a href=""><button class="btn">Supprimer ❌</button></a><br>
-                <a href="watch.html"><button class="btn">Reagarder ►</button></a>
-                <a href="reserver.html"><button class="btn">Réserver 📅</button></a>
-            </section>
+      <div class="location" id="home">
+        <h1 id="">Tout les films <button class="btn-delete" id="ajouter">+ Ajouter</button></h1>
+        <div class="box">
+          <a href="admin-modifier.html"><img src="../assets/duen-affiche.jpg" alt=""></a>
+          <a href=""><img src="../assets/heureux.jpg" alt=""></a>
+          <a href=""><img src="../assets/spider.jpg" alt=""></a>
+          <a href=""><img src="../assets/super-heros.jpg" alt=""></a>
+          <a href=""><img src="../assets/marvel.jpg" alt=""></a>
+          <a href=""><img src="../assets/titanic.jpg" alt=""></a>
+  
+          <a href="admin-modifier.html"><img src="../assets/titanic.jpg" alt=""></a>
+          <a href=""><img src="../assets/super-heros.jpg" alt=""></a>
+          <a href=""><img src="../assets/marvel.jpg" alt=""></a>
+          <a href=""><img src="../assets/heureux.jpg" alt=""></a>
+          <a href=""><img src="../assets/spider.jpg" alt=""></a>
+          <a href=""><img src="../assets/duen-affiche.jpg" alt=""></a>      
         </div>
+    </div>
         
         <div class="location" id="home" >
-            <h1 id="home">Date réservation</h1>
-            <div class="box">
-                <a onclick="affichageResvesation('a1')" id="a1">Lundi 15 novembre 15h00</a>
-                <a onclick="affichageResvesation('a1')" id="a1">Lundi 15 decembre 16h00</a>
-                <a onclick="affichageResvesation('a3')" id="a3">Lundi 15 janvier 17h00</a>
-                <a onclick="affichageResvesation('a4')" id="a4">Lundi 15 février 10h00</a>
-                <a onclick="affichageResvesation('a5')" id="a5">Lundi 15 avril 14h00</a>
-                <a onclick="affichageResvesation('a6')" id="a6">Lundi 15 juin 20h00</a>
+          <div id="overlay" class="overlay">
+            <div id="popup" class="popup ajouterfilm">
+              <span id="btnClose" onclick="closeModal()" class="btnClose">❌</span>              
+              <input class="commentaire-fond input-popup" id="addfilm" placeholder="Titre du film">              
+              <textarea rows="6" class="commentaire-fond input-popup">Description</textarea>
+              <p>Image film :</p>
+              <input class="commentaire-fond-sansMargin input-popup" type="file" id="imagefilm"><br>
+              <button class="btnPopup" onclick="add()">Enregistrer ⬇️</button>
             </div>
-            <div id="listeReservation" hidden>
-                <h1 id="">Personne ayant réserver</h1>
-                <input class="commentaire-fond input-taille" value="Lundi 15 novembre 15h00"><a id="">❌ Surrpimer séance</a><br>
-                <div class="box top">
-                    <a id=""><p>Marc bideau</p>❌</a>
-                    <a id=""><p>Marc bido</p>❌</a>
-                    <a id=""><p>Marc bidau</p>❌</a>
-                    <a id=""><p>Marc bideaux</p>❌</a>
-                    <a id=""><p>Marc bidaux</p>❌</a>
-                    <a id=""><p>Marc bid0</p>❌</a>
-                </div>
-            </div>
-            
-            <a href=""><button class="btn center top">Enregistrer ⬇️</button></a>
+          </div>
         </div>
     </section>
 
@@ -74,9 +69,47 @@
 </body>
 </html>
 <script>
-    function affichageResvesation(a)
+  let ancien,dateReservation;
+
+  var btnPopup = document.getElementById('ajouter');
+  var overlay = document.getElementById('overlay');
+  btnPopup.addEventListener('click',openMoadl);
+  function openMoadl() {
+    overlay.style.display='block';
+  }
+    function affichageResvesation(a,text)
     {
       document.getElementById("listeReservation").hidden = false;
       document.getElementById(a).style.backgroundColor = "#ffffff27";
+      document.getElementById('inputDate').value = text;
+      this.dateReservation = a;
+      if (this.ancien != null) {
+        document.getElementById(this.ancien).style.backgroundColor = "";
+      }
+      this.ancien = a;        
+    }
+    function deletePersonne(a)
+    {
+      document.getElementById(a).hidden = true; 
+    }
+    function deleteSeance()
+    {
+      document.getElementById(this.dateReservation).hidden = true;
+      document.getElementById("listeReservation").hidden = true;
+
+    }
+    function closeModal() {
+      overlay.style.display='none';
+    }
+    function add()
+    {
+      var a = document.createElement('a');
+      a.textContent = document.getElementById('addseance').value;
+      a.id = "a7";
+      document.getElementById('listeDate').append(a);
+      a.addEventListener("click", () => {
+        affichageResvesation('a7',a.textContent);
+      });
+      overlay.style.display='none';       
     }
   </script>

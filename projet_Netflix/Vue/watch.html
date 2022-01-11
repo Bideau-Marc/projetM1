@@ -34,7 +34,7 @@
     <section class="main-container" >
       <div>
         <section class="film">
-            <h1 class="pitch-title">Reagarder film<a class="">❤</a></h1>
+            <h1 class="pitch-title">Reagarder film <a onclick="favori()" id="favori">★</a></h1>
             <p class="pitch-subtitle">Description</p>
             <a href="watch.html"><button class="btn">Reagarder ►</button></a>
             <a href="reserver.html"><button class="btn">Réserver 📅</button></a>
@@ -144,8 +144,23 @@
     </section>
 
     <footer>
-      <a href="./contact.html" class="flooter">Contact</a>
+      <a href="./contact.html" class="flooter">Contact ☎️</a>
     </footer>
   </div>
 </body>
 </html>
+<script>
+  Boolean: favari = false;
+  function favori()
+  {
+    var fav = document.getElementById("favori");
+    if (favari == false) {
+      favari = true;
+      fav.style.color = "#FFD700";
+    }else{
+      favari = false;
+      fav.style.color = "";
+    }
+    
+  }
+</script>

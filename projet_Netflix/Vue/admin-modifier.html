@@ -1,0 +1,129 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Netflix</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <header>
+      <div class="netflixLogo">
+        <a id="logo" href="accueil.html#home"><img src="../assets/flixnet.png" alt="Logo Image"></a>
+      </div>      
+      <nav class="main-nav">                
+        <a href="accueil.html">Films/Séries</a>
+        <a href="reserver_tout.html">Réservation</a>
+        <a href=""></a>
+      </nav>
+      <nav class="sub-nav">
+        <a href="#"><i class="fas fa-search sub-nav-logo"></i></a>
+        <a href="#"><i class="fas fa-bell sub-nav-logo"></i></a>
+        <a href="#">Account</a>        
+      </nav>      
+    </header>
+    <!-- END OF HEADER -->
+    
+    <!-- MAIN CONTAINER -->
+    <div class="main-container" >
+      <div class="top" >
+        <section class="film">
+          <input class="commentaire-fond input-popup" value="Dune"><br>
+          <textarea rows="5" cols="50" class="commentaire-fond input-popup">Description</textarea><br>
+          <a href=""><button class="btn">Enregistrer ⬇️</button></a>
+          <a href=""><button class="btn">Supprimer ❌</button></a><br>
+          <a href="watch.html"><button class="btn">Reagarder ►</button></a>
+          <a href="reserver.html"><button class="btn">Réserver 📅</button></a>
+        </section>
+      </div>
+      
+      <div class="location" id="home" >
+        <h1 id="home">Date réservation <button class="btn-delete" id="ajouter">+ Ajouter</button></h1>
+        <div class="box" id="listeDate">
+          <a onclick="affichageResvesation('a1','Lundi 15 novembre 15h00')" id="a1">Lundi 15 novembre 15h00</a>
+          <a onclick="affichageResvesation('a2','Lundi 15 decembre 16h00')" id="a2">Lundi 15 decembre 16h00</a>
+          <a onclick="affichageResvesation('a3','Lundi 15 janvier 17h00')" id="a3">Lundi 15 janvier 17h00</a>
+          <a onclick="affichageResvesation('a4','Lundi 15 février 10h00')" id="a4">Lundi 15 février 10h00</a>
+          <a onclick="affichageResvesation('a5','Lundi 15 avril 14h00')" id="a5">Lundi 15 avril 14h00</a>
+          <a onclick="affichageResvesation('a6','Lundi 15 juin 20h00')" id="a6">Lundi 15 juin 20h00</a>
+        </div>
+        <div id="listeReservation" hidden>
+          <h1 id="">Personne ayant réserver</h1>
+          <input class="commentaire-fond input-taille" id="inputDate">
+          <button class="btn-delete" id="deleteSeance" onclick="deleteSeance()"> ❌ Supprimer séance</button><br>
+          <div class="box top" id="">
+            <button class="btn-delete" id="p1" onclick="deletePersonne('p1')"><p>Marc bideau</p> ❌</button>
+            <button class="btn-delete" id="p2" onclick="deletePersonne('p2')"><p>Marc bido</p>❌</button>
+            <button class="btn-delete" id="p3" onclick="deletePersonne('p3')"><p>Marc bidau</p>❌</button>
+            <button class="btn-delete" id="p4" onclick="deletePersonne('p4')"><p>Marc bideaux</p>❌</button>
+            <button class="btn-delete" id="p5" onclick="deletePersonne('p5')"><p>Marc bidaux</p>❌</button>
+            <button class="btn-delete" id="p6" onclick="deletePersonne('p6')"><p>Marc bid0</p>❌</button>
+          </div>
+        </div>
+        
+        <div id="overlay" class="overlay">
+          <div id="popup" class="popup dune">
+            <h2>Dune <span id="btnClose" onclick="closeModal()" class="btnClose">❌</span></h2>
+            <input class="commentaire-fond-sansMargin " id="addseance" type="date"><br>
+            <button class="btnPopup" onclick="add()">Enregistrer ⬇️</button>
+          </div>
+        </div>
+
+        <a href=""><button class="btn center top">Enregistrer ⬇️</button></a>
+      </div>
+    </div>
+
+    <footer>
+      <a href="./contact.html" class="flooter">Contact ☎️</a>
+    </footer>
+  </div>
+</body>
+</html>
+<script>
+  let ancien,dateReservation;
+
+  var btnPopup = document.getElementById('ajouter');
+  var overlay = document.getElementById('overlay');
+  btnPopup.addEventListener('click',openMoadl);
+  function openMoadl() {
+    overlay.style.display='block';
+  }
+    function affichageResvesation(a,text)
+    {
+      document.getElementById("listeReservation").hidden = false;
+      document.getElementById(a).style.backgroundColor = "#ffffff27";
+      document.getElementById('inputDate').value = text;
+      this.dateReservation = a;
+      if (this.ancien != null) {
+        document.getElementById(this.ancien).style.backgroundColor = "";
+      }
+      this.ancien = a;        
+    }
+    function deletePersonne(a)
+    {
+      document.getElementById(a).hidden = true; 
+    }
+    function deleteSeance()
+    {
+      document.getElementById(this.dateReservation).hidden = true;
+      document.getElementById("listeReservation").hidden = true;
+
+    }
+    function closeModal() {
+      overlay.style.display='none';
+    }
+    function add()
+    {
+      var a = document.createElement('a');
+      a.textContent = document.getElementById('addseance').value;
+      a.id = "a7";
+      document.getElementById('listeDate').append(a);
+      a.addEventListener("click", () => {
+        affichageResvesation('a7',a.textContent);
+      });
+      overlay.style.display='none';       
+    }
+  </script>
