@@ -134,5 +134,20 @@
       <a href="./contact.html" class="flooter">Contact ☎️</a>
     </footer>
   </div>
+  <script>
+  url ='http://localhost/projetM1/projet_Netflix/Controleur/getFilms.php';
+  fetch(url)
+  .then(function (response) {
+      console.log('reponse',url)
+    return response.json();
+  })
+  .then(function (myJson) {
+    console.log(myJson.ip,"ip");
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+
+  </script>
 </body>
 </html>
