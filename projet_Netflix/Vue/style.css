@@ -8,8 +8,24 @@
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
 }
+.film-reserve {
+  height: 30%;
+  background-image: url("../assets/Dune.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
 
 .pitch-title {
+	font-size: 3em;
+	margin: 10px;
+	font-weight: 700;
+  padding-top: 60px; 
+}
+.title {
 	font-size: 3em;
 	margin: 10px;
 	font-weight: 700;
@@ -40,7 +56,7 @@
 	margin: 10px;
 	padding: 12px 2em;
 	color: #fff;
-	background-color: #e50914;
+	background-color: #7B68EE;
 	cursor: pointer;
 	text-decoration: none;
 	vertical-align: middle;
@@ -53,10 +69,11 @@
 
 nav .signin:hover,
 .btn:hover {
-	background: #f40612;
+	background: #7B68EE;
 }
-/* CSS VARIABLES */
+/* CSS VARIABLES 210041 */
 :root {
+  --primary-violet: #210041;
   --primary: #141414;
   --light: #F3F3F3;
   --dark: 	#686868;
@@ -67,7 +84,7 @@ html, body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: var(--primary);
+  background-color: var(--primary-violet);
   color: var(--light);
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
@@ -76,10 +93,6 @@ html, body {
 
 img {
   max-width: 100%;
-}
-
-h1 {
-  padding-top: 60px;  
 }
 
 .wrapper {
@@ -97,7 +110,7 @@ header {
   grid-template-columns: 1fr 4fr 1fr;
   grid-template-areas: 
     "nt mn mn sb . . . "; 
-  background-color: var(--primary);
+  background-color: #7B68EE;
   width: 100%;
   margin-bottom: 0px;  
 }
@@ -117,7 +130,7 @@ header {
 }
 
 #logo {
-  color: #E50914;  
+  color: #7B68EE;  
   margin: 0; 
   padding: 0; 
 }
@@ -357,7 +370,7 @@ footer {
 }
 
 .Button[data-primary=true] {
-  border: 2px solid #e50914;
+  border: 2px solid #7B68EE;
 }
 
 /* Page Connexion */
@@ -444,7 +457,7 @@ input[type=email] {
 	width: 90%;
 	height: 50px;
 	border-radius: 5px;
-	background: red;
+	background: #7B68EE;
 	color: #fff;
 	font-size: inherit;
 	font-weight: bold;
@@ -498,7 +511,7 @@ input[type=email] {
   margin-top: 20px;
 	padding: 12px 2em;
 	color: #fff;
-	background-color: #e50914;
+	background-color: #210041;
 	cursor: pointer;
 	text-decoration: none;
 	vertical-align: middle;
@@ -509,7 +522,7 @@ input[type=email] {
 	border: none;
 }
 .btnPopup:hover{
-  background: #f40612;
+  background: #210041;
 }
 .overlay {
   position: fixed;
@@ -527,7 +540,7 @@ input[type=email] {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom right;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(33, 0, 65, 0.5);
   padding: 1em;
   border-radius: 5px;
 }
