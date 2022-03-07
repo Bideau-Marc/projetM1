@@ -12,7 +12,7 @@
     <!-- HEADER -->
     <header>
       <div class="netflixLogo">
-        <a id="logo" href="accueil.html#home"><img src="../assets/flixnet.png" alt="Logo Image"></a>
+        <a id="logo" href="accueil.html#home"><img src="../assets/netflix_violet.png" alt="Logo Image"></a>
       </div>      
       <nav class="main-nav">                
         <a href="accueil.html">Films/Séries</a>
@@ -22,7 +22,7 @@
       <nav class="sub-nav">
         <a href="#"><i class=""></i></a>
         <a href="#"><i class=""></i></a>
-        <a href="#">Account</a>        
+        <a href="./reserve.html">Compte</a>        
       </nav>      
     </header>
     <!-- END OF HEADER -->
@@ -41,7 +41,7 @@
       <div class="location" id="home">
         <h1 id="home">Date réservation</h1>
         <div class="box">
-          <a onclick="changerCouleur()" id="a1">Lundi 15 novembre 15h06</a>
+          <a onclick="changerCouleur()" id="bloc1">Lundi 15 novembre 15h06 <span id="a1"></span></a>
           <a>Lundi 15 novembre 15h06</a>
           <a>Lundi 18 novembre 15h06</a>
           <a>Lundi 15 novembre 15h06</a>
@@ -52,6 +52,15 @@
       </div>
     </section>
 
+    <div id="overlay" class="overlay">
+      <div id="popup" class="popup">
+        <h2>
+        Plus de places / Complet
+        <span id="btnClose" class="btnClose">&times;</span>
+        </h2>        
+      </div>
+    </div>
+
     <footer>
       <a href="./contact.html" class="flooter">Contact</a>
     </footer>
@@ -60,12 +69,28 @@
 </html>
 <script>
   Boolean: favari = false;
+  Boolean: reserver = false;
+  Number: reserver = 0;
+  Number: reserverMax = 12;
   function changerCouleur()
   {
     var property = document.getElementById("a1");
-    property.textContent += " ✅";
-    property.style.backgroundColor = "#FFFFFF";
-    property.style.color = "#000000";
+    var bloc1 = document.getElementById("bloc1");
+    if(reserver){
+      if (reserver >= reserverMax) {
+      }else{
+        reserver ++;
+        property.textContent =" ✅ "+reserver +" Places réservés";
+        bloc1.style.backgroundColor = "#FFFFFF";
+        bloc1.style.color = "#000000";
+      }      
+    }else{
+      reserver ++;
+      property.textContent += " ✅";
+      bloc1.style.backgroundColor = "#FFFFFF";
+      bloc1.style.color = "#000000";
+    }
+    
   }
   function favori()
   {

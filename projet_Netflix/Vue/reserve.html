@@ -1,0 +1,57 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Netflix</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <header>
+      <div class="netflixLogo">
+        <a id="logo" href="accueil.html#home"><img src="../assets/netflix_violet.png" alt="Logo Image"></a>
+      </div>      
+      <nav class="main-nav">                
+        <a href="accueil.html">Films/Séries</a>
+        <a href="reserver_tout.html">Réservation</a>
+        <a href=""></a>
+      </nav>
+      <nav class="sub-nav">
+        <a href="#"><i class=""></i></a>
+        <a href="#"><i class=""></i></a>
+        <a href="./reserve.html">Compte</a>        
+      </nav>      
+    </header>
+    <!-- END OF HEADER -->
+    
+    <!-- MAIN CONTAINER -->
+    <section class="main-container" >
+      <h1 id="Recommandation">Films réservés</h1>
+        <section class="film-reserve" id="r1">
+          <h1 class="title">Dune</h1>
+          <p class="pitch-subtitle">Séance réservée le lundi 15 novembre 15h06</p>
+          <button class="btn" onclick="annuler('r1')">Annuler la séance ❌</button>
+        </section>
+        <section class="film-reserve" id="r2">
+          <h1 class="title">Super-héros</h1>
+          <p class="pitch-subtitle">Séance réservée le Samedi 20 novembre 20H31</p>
+          <button class="btn" onclick="annuler('r2')">Annuler la séance ❌</button>
+        </section>
+    </section>
+
+    <footer>
+      <a href="./contact.html" class="flooter">Contact</a>
+    </footer>
+  </div>
+</body>
+</html>
+<script>
+  document.getElementById("r2").style.backgroundImage = "url('../assets/super-heros.jpg')";
+  function annuler(r)
+  {
+    document.getElementById(r).hidden = true;
+  }
+</script>
