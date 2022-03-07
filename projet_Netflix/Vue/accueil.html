@@ -135,18 +135,24 @@
     </footer>
   </div>
   <script>
-  url ='http://localhost/projetM1/projet_Netflix/Controleur/getFilms.php';
-  fetch(url)
+  getFilm ='http://localhost/projetM1/projet_Netflix/Controleur/getFilms.php';
+  getFilmPrecis = 'http://localhost/projetM1/projet_Netflix/Controleur/getFilms.php?=+'+document.getElementById('titreduFilm')
+  getSeries = 'http://localhost/projetM1/projet_Netflix/Controleur/getSeries.php';
+  fetch(getFilm)
   .then(function (response) {
-      console.log('reponse',url)
+      console.log('reponse',url,"response",response)
     return response.json();
   })
   .then(function (myJson) {
-    console.log(myJson.ip,"ip");
+    console.log(myJson,"ip",myJson);
+    myJson.forEach(element => {
+      console.log(element,"jesuisle5emeElmeent")
+  });
   })
   .catch(function (error) {
     console.log("Error: " + error);
   });
+
 
   </script>
 </body>

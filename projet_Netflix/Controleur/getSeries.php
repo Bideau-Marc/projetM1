@@ -22,7 +22,7 @@ switch($request_method)
   function getProducts()
   {
     global $conn;
-    $query = "SELECT * FROM film ";
+    $query = "SELECT * FROM serie ";
     $response = array();
     $result = mysqli_query($conn, $query);
     while($row = mysqli_fetch_assoc($result))
@@ -35,12 +35,12 @@ switch($request_method)
   function getProduct($id="")
   {
     global $conn;
-    $query = "SELECT * FROM film";
+    $query = "SELECT * FROM serie";
     if($id != '')
     {
+      str_replace("%20", " ", $id, $id2);
       $query .= " WHERE titre='".$id."' LIMIT 1";
     }
-    echo $query.' '. 'id = '.$id;
     $response = array();
     $result = mysqli_query($conn, $query);
     while($row = mysqli_fetch_assoc($result))
