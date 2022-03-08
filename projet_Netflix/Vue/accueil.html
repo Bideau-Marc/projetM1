@@ -164,20 +164,21 @@
   connexion = 'http://localhost/projetM1/projet_Netflix/Controleur/connexionUser.php';
   inscription = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php?admin=1';
   data = JSON.stringify({name:"m233",mdp:"m1"});
-  // fetch(connexion)
-  // .then(function (response) {
-  //     console.log('reponse',getFilm,"response",response)
-  //   return response.json();
-  // })
-  // .then(function (myJson) {
-  //   console.log(myJson,"ip",myJson);
-  // //   myJson.forEach(element => {
-  // //     console.log(element,"jesuisle5emeElmeent")
-  // // });
-  // })
-  // .catch(function (error) {
-  //   console.log("Error: " + error);
-  // });
+  getEpisodes ='http://localhost/projetM1/projet_Netflix/Controleur/getEpisodes.php?id=2'
+  fetch(getEpisodes)
+  .then(function (response) {
+      console.log('reponse',getEpisodes,"response",response)
+    return response.json();
+  })
+  .then(function (myJson) {
+    console.log(myJson,"ip",myJson);
+    myJson.forEach(element => {
+      console.log(element,"jesuisle5emeElmeent")
+  });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
 
 //   fetch(connexion,
 // {
@@ -190,7 +191,7 @@
 // })
 // .then(function(res){ console.log(res, "jesuis dans le then") })
 // .catch(function(res){ console.log(res, "jesuis dans le data") })
-(async () => {
+/*(async () => {
   const rawResponse = await fetch(inscription, {
     method: 'POST',
     headers: {
@@ -203,7 +204,7 @@
   const content = await rawResponse.json();
 
   console.log(content);
-})();
+})();*/
   </script>
 </body>
 </html>
