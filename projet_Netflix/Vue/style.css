@@ -1,10 +1,11 @@
 .film {
-  height: 60%;
+  height: auto;
   background-image: url("../assets/Dune.jpg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom right;
   margin-top: 20px;
+  margin-bottom: 20px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
 }
@@ -30,7 +31,12 @@
 	margin: 10px;
 	font-weight: 700;
 }
-
+.taille{
+  height: auto;
+}
+.p-resume {
+	width: 50%;
+}
 .pitch-subtitle {
 	margin: 10px;
 }

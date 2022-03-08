@@ -33,19 +33,28 @@
     <!-- MAIN CONTAINER -->
     <section class="main-container" >
       <div>
-        <section class="film" id="film">
-          <h1 class="pitch-title">Regarder film <a onclick="favori()" id="favori">★</a></h1>
-          <p class="pitch-subtitle">Description</p>
+        <section class="film" id="imgback">
+          <h1 class="pitch-title"><span id="titre"></span><a onclick="favori()" id="favori"> ★</a></h1>
+          <p class="pitch-subtitle" id="resume"></p>
           <a href="watch.html"><button class="btn">Reagarder ►</button></a>
-          <a href="reserver.html"><button class="btn">Réserver 📅</button></a>
         </section>
       </div>
       
       <div class="location top" id="home">
-        <button class="btn-delete espacebas" id="" onclick="">Saison 1</button>
+        <button class="btn-delete espacebas" id="S1" onclick="saison('S1')">Saison 1</button>
         <button class="btn-delete espacebas" id="S2" onclick="saison('S2')">Saison 2</button>
         <button class="btn-delete espacebas" id="S3" onclick="saison('S3')">Saison 3</button>
-        <div id="Saison2">
+        <div id="Saison1">
+          <div class="box" id="episode1">
+            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 1</a>
+            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 2</a>
+            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 3</a>
+            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 4</a>
+            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 5</a>
+            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 6</a>
+          </div>
+        </div> 
+        <div id="Saison2" hidden>
           <div class="box" id="episode1">
             <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 1</a>
             <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 2</a>
@@ -102,14 +111,39 @@
         document.getElementById(ancienbtn).style.backgroundColor = "#ffffff27";
     }
     ancienbtn = btn;
-    if (btn == 'S2') {
-        document.getElementById("Saison2").hidden = false;
-        document.getElementById("Saison3").hidden = true;
-        document.getElementById("film").style.backgroundImage = 'url("../assets/stranger-things-S02.jpg")';
-    }else{
-        document.getElementById("Saison2").hidden = true;
-        document.getElementById("Saison3").hidden = false;
-        document.getElementById("film").style.backgroundImage = "url('../assets/stranger-things-S03.jpg')";
+    if (btn == 'S1') {
+      document.getElementById("Saison1").hidden = false;
+      document.getElementById("Saison2").hidden = true;
+      document.getElementById("Saison3").hidden = true;
+      document.getElementById("imgback").style.backgroundImage = 'url("../assets/stranger-things-S01.jpg")';
+    }else if (btn == 'S2') {
+      document.getElementById("Saison1").hidden = true;
+      document.getElementById("Saison2").hidden = false;
+      document.getElementById("Saison3").hidden = true;
+      document.getElementById("imgback").style.backgroundImage = 'url("../assets/stranger-things-S02.jpg")';
+    }else if (btn == 'S3'){
+      document.getElementById("Saison1").hidden = true;
+      document.getElementById("Saison2").hidden = true;
+      document.getElementById("Saison3").hidden = false;
+      document.getElementById("imgback").style.backgroundImage = "url('../assets/stranger-things-S03.jpg')";
     }
   }
+
+  getSeriesPrecis = 'http://projetm1/projet_Netflix/Controleur/getSeries.php?id=Stranger%20Things';
+  fetch(getSeriesPrecis)
+  .then(function (response) {
+      //console.log('reponse',getFilm,"response",response)
+    return response.json();
+  })
+  .then(function (myJson) {
+    //console.log(myJson,"ip",myJson);
+    myJson.forEach(element => {
+      document.getElementById("imgback").style.backgroundImage = "url("+element.lien_image+")";
+      document.getElementById("titre").textContent += element.titre;
+      document.getElementById("resume").textContent = element.resume;
+  });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
 </script>
