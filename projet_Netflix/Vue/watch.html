@@ -115,8 +115,7 @@
   }
   var url = new URL(document.location.href);
   var name1 = url.searchParams.get("film");
-  console.log(name1)
-  getFilmPrecis = 'http://projetm1/projet_Netflix/Controleur/getFilms.php?id='+name1;
+  getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id='+name1;
   fetch(getFilmPrecis)
   .then(function (response) {
       //console.log('reponse',getFilm,"response",response)

@@ -117,9 +117,9 @@
     </footer>
   </div>
   <script>
-  getFilm ='http://projetm1/projet_Netflix/Controleur/getFilms.php';
-  getFilmPrecis = 'http://projetm1/projet_Netflix/Controleur/getFilms.php?id=Dune'
-  getSeries = 'http://projetm1/projet_Netflix/Controleur/getSeries.php';
+  getFilm ='http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php';
+  getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id=Dune'
+  getSeries = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php';
   fetch(getFilm)
   .then(function (response) {
       //console.log('reponse',getFilm,"response",response)
@@ -167,13 +167,13 @@
   getEpisodes ='http://localhost/projetM1/projet_Netflix/Controleur/getEpisodes.php?id=2'
   fetch(getEpisodes)
   .then(function (response) {
-      console.log('reponse',getEpisodes,"response",response)
+      //console.log('reponse',getFilm,"response",response)
     return response.json();
   })
   .then(function (myJson) {
-    console.log(myJson,"ip",myJson);
+    //console.log(myJson,"ip",myJson);
     myJson.forEach(element => {
-      console.log(element,"jesuisle5emeElmeent")
+      console.log(element,"jesuisle5emeElmeent");
   });
   })
   .catch(function (error) {

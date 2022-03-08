@@ -128,15 +128,17 @@
       document.getElementById("imgback").style.backgroundImage = "url('../assets/stranger-things-S03.jpg')";
     }
   }
-
-  getSeriesPrecis = 'http://projetm1/projet_Netflix/Controleur/getSeries.php?id=Stranger%20Things';
+  var url = new URL(document.location.href);
+  var name1 = url.searchParams.get("series");
+  console.log(name1);
+  getSeriesPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php?id='+name1;
   fetch(getSeriesPrecis)
   .then(function (response) {
       //console.log('reponse',getFilm,"response",response)
     return response.json();
   })
   .then(function (myJson) {
-    //console.log(myJson,"ip",myJson);
+    console.log(myJson,"ip",myJson);
     myJson.forEach(element => {
       document.getElementById("imgback").style.backgroundImage = "url("+element.lien_image+")";
       document.getElementById("titre").textContent += element.titre;
