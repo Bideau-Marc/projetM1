@@ -40,7 +40,6 @@ switch($request_method)
     {
       $query .= " WHERE titre='".$id."' LIMIT 1";
     }
-    echo $query.' '. 'id = '.$id;
     $response = array();
     $result = mysqli_query($conn, $query);
     while($row = mysqli_fetch_assoc($result))

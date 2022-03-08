@@ -138,21 +138,48 @@
   getFilm ='http://localhost/projetM1/projet_Netflix/Controleur/getFilms.php';
   getFilmPrecis = 'http://localhost/projetM1/projet_Netflix/Controleur/getFilms.php?=+'+document.getElementById('titreduFilmParExempleTitanic')
   getSeries = 'http://localhost/projetM1/projet_Netflix/Controleur/getSeries.php';
-  fetch(getFilm)
-  .then(function (response) {
-      console.log('reponse',getFilm,"response",response)
-    return response.json();
-  })
-  .then(function (myJson) {
-    console.log(myJson,"ip",myJson);
-    myJson.forEach(element => {
-      console.log(element,"jesuisle5emeElmeent")
-  });
-  })
-  .catch(function (error) {
-    console.log("Error: " + error);
-  });
+  connexion = 'http://localhost/projetM1/projet_Netflix/Controleur/connexionUser.php';
+  data = JSON.stringify({name:"marc",mdp:"m"});
+  // fetch(connexion)
+  // .then(function (response) {
+  //     console.log('reponse',getFilm,"response",response)
+  //   return response.json();
+  // })
+  // .then(function (myJson) {
+  //   console.log(myJson,"ip",myJson);
+  // //   myJson.forEach(element => {
+  // //     console.log(element,"jesuisle5emeElmeent")
+  // // });
+  // })
+  // .catch(function (error) {
+  //   console.log("Error: " + error);
+  // });
 
+//   fetch(connexion,
+// {
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     },
+//     method: "POST",
+//     body: data
+// })
+// .then(function(res){ console.log(res, "jesuis dans le then") })
+// .catch(function(res){ console.log(res, "jesuis dans le data") })
+(async () => {
+  const rawResponse = await fetch(connexion, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:data
+  });
+  console.log(await rawResponse)
+  const content = await rawResponse.json();
+
+  console.log(content);
+})();
 
   </script>
 </body>
