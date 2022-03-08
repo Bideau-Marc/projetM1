@@ -18,7 +18,7 @@
       </div>
       <nav class="main-nav">                
         <a href="accueil.html">Films/Séries</a>
-        <a href="reserver_tout.html">Réservation</a>
+        <a href="reserver_tout.html">Séances</a>
         <a href=""></a>
       </nav>  
 
@@ -41,39 +41,43 @@
       </div>
       
       <div class="location top" id="home">
-        <button class="btn-delete espacebas" id="S1" onclick="saison('S1')">Saison 1</button>
-        <button class="btn-delete espacebas" id="S2" onclick="saison('S2')">Saison 2</button>
-        <button class="btn-delete espacebas" id="S3" onclick="saison('S3')">Saison 3</button>
-        <div id="Saison1">
-          <div class="box" id="episode1">
-            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 1</a>
-            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 2</a>
-            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 3</a>
-            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 4</a>
-            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 5</a>
-            <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 6</a>
-          </div>
-        </div> 
-        <div id="Saison2" hidden>
-          <div class="box" id="episode1">
-            <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 1</a>
-            <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 2</a>
-            <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 3</a>
-            <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 4</a>
-            <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 5</a>
-            <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 6</a>
-          </div>
-        </div>            
-        <div id="Saison3" hidden>
-          <div class="box">
-            <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 1</a>
-            <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 2</a>
-            <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 3</a>
-            <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 4</a>
-            <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 5</a>
-            <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 6</a>
-          </div>
-        </div>          
+        <div id="btn">
+           <!-- <button class="btn-delete espacebas" id="S1" onclick="saison('S1')">Saison 1</button>
+          <button class="btn-delete espacebas" id="S2" onclick="saison('S2')">Saison 2</button>
+          <button class="btn-delete espacebas" id="S3" onclick="saison('S3')">Saison 3</button>  -->
+        </div>
+        <div id="affichage">
+          <!-- <div id="Saison1">
+            <div class="box" id="episode1">
+              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 1</a>
+              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 2</a>
+              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 3</a>
+              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 4</a>
+              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 5</a>
+              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 6</a>
+            </div>
+          </div> 
+          <div id="Saison2" hidden>
+            <div class="box" id="episode1">
+              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 1</a>
+              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 2</a>
+              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 3</a>
+              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 4</a>
+              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 5</a>
+              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 6</a>
+            </div>
+          </div>            
+          <div id="Saison3" hidden>
+            <div class="box">
+              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 1</a>
+              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 2</a>
+              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 3</a>
+              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 4</a>
+              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 5</a>
+              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 6</a>
+            </div>
+          </div> -->
+        </div>
       </div>
 
       <div class="commentaire-fond top">
@@ -128,21 +132,80 @@
       document.getElementById("imgback").style.backgroundImage = "url('../assets/stranger-things-S03.jpg')";
     }
   }
+
   var url = new URL(document.location.href);
-  var name1 = url.searchParams.get("series");
-  console.log(name1);
-  getSeriesPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php?id='+name1;
+  var idseries = url.searchParams.get("series");
+  getSeriesPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php?id='+idseries;
   fetch(getSeriesPrecis)
   .then(function (response) {
       //console.log('reponse',getFilm,"response",response)
     return response.json();
   })
   .then(function (myJson) {
-    console.log(myJson,"ip",myJson);
+    //console.log(myJson,"ip",myJson);
     myJson.forEach(element => {
       document.getElementById("imgback").style.backgroundImage = "url("+element.lien_image+")";
       document.getElementById("titre").textContent += element.titre;
       document.getElementById("resume").textContent = element.resume;
+  });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+  
+  getEpisodes ='http://localhost/projetM1/projet_Netflix/Controleur/getEpisodes.php?id='+idseries
+  fetch(getEpisodes)
+  .then(function (response) {
+      //console.log('reponse',getFilm,"response",response)
+    return response.json();
+  })
+  .then(function (myJson) {
+    var saison = 0;
+    
+    for (i = 0; i < myJson[myJson.length-1].saison; i++) {
+      let div  = document.createElement('div');
+      let divsous  = document.createElement('div');
+      let x = i;
+      x++;
+      div.id="Saison"+x;
+      divsous.className="box";
+      divsous.id="divsous"+x;
+      if (i>=1) {
+        div.hidden = true;
+      }
+      div.append(divsous);
+      document.getElementById("affichage").append(div);
+    }
+    myJson.forEach((element, index)=> {
+      if (saison != element.saison) {        
+        let button  = document.createElement('button');
+        button.className = 'btn-delete espacebas';
+        button.textContent = "Saison"+element.saison;
+        button.id = "S"+element.saison;
+        button.addEventListener("click", () => {
+          this.saison("S"+element.saison);
+        });
+        document.getElementById("btn").append(button);
+        saison = element.saison;
+      }
+      let a  = document.createElement('a');
+      let img  = document.createElement('img');
+      img.src = element.lien_image;
+      a.textContent = element.nom;
+      a.append(img);
+      switch (element.saison) {
+        case "1":
+          document.getElementById("divsous1").appendChild(a);
+          break;
+        case "2":
+          document.getElementById("divsous2").appendChild(a)
+          break;
+        case "3":
+          document.getElementById("divsous3").appendChild(a)
+          break; 
+        default:
+          break;
+      }
   });
   })
   .catch(function (error) {

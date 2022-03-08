@@ -18,7 +18,7 @@
       </div>      
       <nav class="main-nav">                
         <a href="accueil.html">Films/Séries</a>
-        <a href="reserver_tout.html">Réservation</a>
+        <a href="reserver_tout.html">Séances</a>
         <a href=""></a>
       </nav>
       
@@ -133,7 +133,7 @@
       let img  = document.createElement('img');
       img.src = element.lien;
       a.append(img);
-      a.href='watch.html'+"?film="+element.titre;
+      a.href='watch.html'+"?film="+element.id;
       document.getElementById("films").append(a);
   });
   })
@@ -153,7 +153,7 @@
       let img  = document.createElement('img');
       img.src = element.lien_image;
       a.append(img);
-      a.href='watch-serie.html'+"?series="+element.titre;
+      a.href='watch-serie.html'+"?series="+element.id;
       document.getElementById("series").append(a);
   });
   })
