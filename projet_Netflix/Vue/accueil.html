@@ -139,7 +139,8 @@
   getFilmPrecis = 'http://localhost/projetM1/projet_Netflix/Controleur/getFilms.php?=+'+document.getElementById('titreduFilmParExempleTitanic')
   getSeries = 'http://localhost/projetM1/projet_Netflix/Controleur/getSeries.php';
   connexion = 'http://localhost/projetM1/projet_Netflix/Controleur/connexionUser.php';
-  data = JSON.stringify({name:"marc",mdp:"m"});
+  inscription = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php?admin=true';
+  data = JSON.stringify({name:"m3",mdp:"m1"});
   // fetch(connexion)
   // .then(function (response) {
   //     console.log('reponse',getFilm,"response",response)
@@ -167,7 +168,7 @@
 // .then(function(res){ console.log(res, "jesuis dans le then") })
 // .catch(function(res){ console.log(res, "jesuis dans le data") })
 (async () => {
-  const rawResponse = await fetch(connexion, {
+  const rawResponse = await fetch(inscription, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
