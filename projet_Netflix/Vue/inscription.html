@@ -15,11 +15,11 @@
             <form>
                 <h2>S'incrire</h2>
                 <div class="info">
-                    <input class="email" type="email" placeholder="Email"> <br>
-                    <input class="email" type="password" placeholder="Password">
+                    <input class="email" type="" placeholder="Email" id="email"> <br>
+                    <input class="email" type="password" placeholder="Password" id="mdp">
                 </div>
                 <div class="btnCo">
-                    <a href="accueil.html"><div class="btn-primary" type="submit">S'inscrire</div></a>
+                    <a onclick="inscription()"><div class="btn-primary" type="submit">S'inscrire</div></a>
                 </div>
                 <div class="help">                    
                     <div class="signup">
@@ -33,5 +33,36 @@
 </div>
 </body>
 </html>
-
-
+<script>
+    function inscription()
+  {
+    var login = document.getElementById("email").value;
+    var mdp = document.getElementById("mdp").value;
+    let data = JSON.stringify({
+        name: login,
+        mdp: mdp
+    });
+    console.log("data",data)
+    inscriptionurl = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php';
+    
+    fetch(inscriptionurl,
+    {
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: data
+    })
+    .then(function (response) {
+        //console.log('reponse',response  ,"response",response)
+        return response.json();
+    })
+    .then(function (myJson) {
+        if (myJson.state == "inscrit") {
+            document.location.href = "./accueil.html"; 
+        }
+    })
+    
+  }    
+</script>
