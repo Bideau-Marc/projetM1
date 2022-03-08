@@ -108,7 +108,7 @@
       fav.style.color = "";
     }  
   }
-  function saison(btn)
+  function saison(btn, urlimage)
   {
     document.getElementById(btn).style.backgroundColor = "#ffffff80";
     if (ancienbtn != null) {
@@ -119,17 +119,17 @@
       document.getElementById("Saison1").hidden = false;
       document.getElementById("Saison2").hidden = true;
       document.getElementById("Saison3").hidden = true;
-      document.getElementById("imgback").style.backgroundImage = 'url("../assets/stranger-things-S01.jpg")';
+      document.getElementById("imgback").style.backgroundImage = 'url('+urlimage+')';
     }else if (btn == 'S2') {
       document.getElementById("Saison1").hidden = true;
       document.getElementById("Saison2").hidden = false;
       document.getElementById("Saison3").hidden = true;
-      document.getElementById("imgback").style.backgroundImage = 'url("../assets/stranger-things-S02.jpg")';
+      document.getElementById("imgback").style.backgroundImage = 'url('+urlimage+')';
     }else if (btn == 'S3'){
       document.getElementById("Saison1").hidden = true;
       document.getElementById("Saison2").hidden = true;
       document.getElementById("Saison3").hidden = false;
-      document.getElementById("imgback").style.backgroundImage = "url('../assets/stranger-things-S03.jpg')";
+      document.getElementById("imgback").style.backgroundImage = 'url('+urlimage+')';
     }
   }
 
@@ -183,7 +183,7 @@
         button.textContent = "Saison"+element.saison;
         button.id = "S"+element.saison;
         button.addEventListener("click", () => {
-          this.saison("S"+element.saison);
+          this.saison("S"+element.saison, element.lien_image);
         });
         document.getElementById("btn").append(button);
         saison = element.saison;

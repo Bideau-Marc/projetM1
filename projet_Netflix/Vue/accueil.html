@@ -180,22 +180,6 @@
   //   console.log("Error: " + error);
   // });
 
-  fetch(connexion,
-{
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    method: "POST",
-    body: data
-})
-.then(function (response) {
-      console.log('reponse',response  ,"response",response)
-    return response.json();
-})
-.then(function (myJson) {
-    console.log(myJson);
-})
 
 /*(async () => {
   const rawResponse = await fetch(inscription, {

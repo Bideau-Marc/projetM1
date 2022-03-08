@@ -15,11 +15,11 @@
             <form>
                 <h2>S'identifier</h2>
                 <div class="info">
-                    <input class="email" type="email" placeholder="Email"> <br>
-                    <input class="email" type="password" placeholder="Password">
+                    <input class="email" type="" placeholder="Email" id="email"> <br>
+                    <input class="email" type="password" placeholder="Password" id="mdp">
                 </div>
                 <div class="btnCo">
-                    <a href="accueil.html"><div class="btn-primary">Connexion</div></a>
+                    <a onclick="connexion()"><div class="btn-primary">Connexion</div></a>
                 </div>
                 <div class="help">
                     <div class="signup">
@@ -33,5 +33,36 @@
 </div>
 </body>
 </html>
-
-
+<script>
+    function connexion(btn, urlimage)
+  {
+    var login = document.getElementById("email").value;
+    var mdp = document.getElementById("mdp").value;
+    let data = JSON.stringify({
+        name: login,
+        mdp: mdp
+    });
+    connexionurl = 'http://localhost/projetM1/projet_Netflix/Controleur/connexionUser.php';
+    
+    fetch(connexionurl,
+    {
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: data
+    })
+    .then(function (response) {
+        //console.log('reponse',response  ,"response",response)
+        return response.json();
+    })
+    .then(function (myJson) {
+        if (myJson[0].state) {
+            document.location.href = "./accueil.html"; 
+        }
+    })
+    
+  }
+    
+</script>
