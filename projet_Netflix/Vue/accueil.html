@@ -163,34 +163,40 @@
   creerFilm = 'http://localhost/projetM1/projet_Netflix/Controleur/creerFilm.php' //en post avec un json {"titre":"nouveaufilmcreergracealapi","lien_vid":"lienvidcreergracealapi","cat":2, "res":"rescreergracealapi","lien":"liencreergracealapi"}
   connexion = 'http://localhost/projetM1/projet_Netflix/Controleur/connexionUser.php';
   inscription = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php?admin=1';
-  data = JSON.stringify({name:"m233",mdp:"m1"});
+  data = JSON.stringify({name:"marc",mdp:"m1"});
   getEpisodes ='http://localhost/projetM1/projet_Netflix/Controleur/getEpisodes.php?id=2'
-  fetch(getEpisodes)
-  .then(function (response) {
-      //console.log('reponse',getFilm,"response",response)
-    return response.json();
-  })
-  .then(function (myJson) {
-    //console.log(myJson,"ip",myJson);
-    myJson.forEach(element => {
-      console.log(element,"jesuisle5emeElmeent");
-  });
-  })
-  .catch(function (error) {
-    console.log("Error: " + error);
-  });
+  // fetch(connexion)
+  // .then(function (response) {
+  //     //console.log('reponse',getFilm,"response",response)
+  //   return response.json();
+  // })
+  // .then(function (myJson) {
+  //   //console.log(myJson,"ip",myJson);
+  //   myJson.forEach(element => {
+  //     console.log(element,"jesuisle5emeElmeent");
+  // });
+  // })
+  // .catch(function (error) {
+  //   console.log("Error: " + error);
+  // });
 
-//   fetch(connexion,
-// {
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json'
-//     },
-//     method: "POST",
-//     body: data
-// })
-// .then(function(res){ console.log(res, "jesuis dans le then") })
-// .catch(function(res){ console.log(res, "jesuis dans le data") })
+  fetch(connexion,
+{
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: data
+})
+.then(function (response) {
+      console.log('reponse',response  ,"response",response)
+    return response.json();
+})
+.then(function (myJson) {
+    console.log(myJson);
+})
+
 /*(async () => {
   const rawResponse = await fetch(inscription, {
     method: 'POST',

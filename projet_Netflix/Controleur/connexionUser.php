@@ -10,10 +10,10 @@ $response = array();
 if ($result=mysqli_query($conn,$request)) {
     $rowcount=mysqli_num_rows($result);
     if($rowcount>0){
-        echo '{ "state":"permited"}';
+        echo '[{ "state":"permited"}]';
     }
     else{
-        echo '{"state":"denied"}';
+        echo '[{"state":"denied"}]';
     }
 } 
 
