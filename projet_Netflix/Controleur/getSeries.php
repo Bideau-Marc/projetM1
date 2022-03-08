@@ -39,7 +39,7 @@ switch($request_method)
     if($id != '')
     {
       str_replace("%20", " ", $id, $id2);
-      $query .= " WHERE titre='".$id."' LIMIT 1";
+      $query .= " WHERE id='".$id."' LIMIT 1";
     }
     $response = array();
     $result = mysqli_query($conn, $query);

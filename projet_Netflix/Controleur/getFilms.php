@@ -38,7 +38,7 @@ switch($request_method)
     $query = "SELECT * FROM film";
     if($id != '')
     {
-      $query .= " WHERE titre='".$id."' LIMIT 1";
+      $query .= " WHERE id='".$id."' LIMIT 1";
     }
     $response = array();
     $result = mysqli_query($conn, $query);
