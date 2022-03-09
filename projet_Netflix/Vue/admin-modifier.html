@@ -31,10 +31,18 @@
     <div class="main-container" >
       <div class="top" >
         <section class="film" id="imgback">
-          <input class="commentaire-fond input-popup" value="Dune"  id="titre"><br>
-          <textarea rows="5" cols="50" class="commentaire-fond input-popup"  id="resume">Description</textarea><br>
-          <a href=""><button class="btn" onclick="add()">Enregistrer ⬇️</button></a>
-          <a href=""><button class="btn">Supprimer ❌</button></a><br>
+          <input class="commentaire-fond input-popup espacegauche" value=""  id="titre">
+          <textarea rows="5" cols="50" class="commentaire-fond input-popup espacegauche"  id="resume"></textarea>
+          <select class="commentaire-fond input-popup espacebas espacegauche" name="categorie" id="categorie">
+            <option value="1">Action</option>
+            <option value="2">Fantastique</option>
+            <option value="3">Humour</option>
+            <option value="4">Horreur</option>
+            <option value="5">Amour</option>
+          </select>
+          <br>
+          <a><button class="btn" onclick="modifier()">Enregistrer ⬇️</button></a>
+          <a><button class="btn">Supprimer ❌</button></a><br>
           <a href="watch.html"><button class="btn">Reagarder ►</button></a>
           <a href="reserver.html"><button class="btn">Réserver 📅</button></a>
         </section>
@@ -83,7 +91,7 @@
 </body>
 </html>
 <script>
-  let ancien,dateReservation, image;
+  let ancien,dateReservation, image, est_film, lien_image;
 
   var btnPopup = document.getElementById('ajouter');
   var overlay = document.getElementById('overlay');
@@ -91,45 +99,103 @@
   function openMoadl() {
     overlay.style.display='block';
   }
-    function affichageResvesation(a,text)
-    {
-      document.getElementById("listeReservation").hidden = false;
-      document.getElementById(a).style.backgroundColor = "#ffffff27";
-      document.getElementById('inputDate').value = text;
-      this.dateReservation = a;
-      if (this.ancien != null) {
-        document.getElementById(this.ancien).style.backgroundColor = "";
-      }
-      this.ancien = a;        
+  function affichageResvesation(a,text)
+  {
+    document.getElementById("listeReservation").hidden = false;
+    document.getElementById(a).style.backgroundColor = "#ffffff27";
+    document.getElementById('inputDate').value = text;
+    this.dateReservation = a;
+    if (this.ancien != null) {
+      document.getElementById(this.ancien).style.backgroundColor = "";
     }
-    function deletePersonne(a)
-    {
-      document.getElementById(a).hidden = true; 
-    }
-    function deleteSeance()
-    {
-      document.getElementById(this.dateReservation).hidden = true;
-      document.getElementById("listeReservation").hidden = true;
+    this.ancien = a;        
+  }
+  function deletePersonne(a)
+  {
+    document.getElementById(a).hidden = true; 
+  }
+  function deleteSeance()
+  {
+    document.getElementById(this.dateReservation).hidden = true;
+    document.getElementById("listeReservation").hidden = true;
 
-    }
-    function closeModal() {
-      overlay.style.display='none';
-    }
-    function add()
-    {
-      var a = document.createElement('a');
-      a.textContent = document.getElementById('addseance').value;
-      a.id = "a7";
-      document.getElementById('listeDate').append(a);
-      a.addEventListener("click", () => {
-        affichageResvesation('a7',a.textContent);
-      });
-      overlay.style.display='none';       
-    }
-
+  }
+  function closeModal() {
+    overlay.style.display='none';
+  }
+  function add()
+  {
+    var a = document.createElement('a');
+    a.textContent = document.getElementById('addseance').value;
+    a.id = "a7";
+    document.getElementById('listeDate').append(a);
+    a.addEventListener("click", () => {
+      affichageResvesation('a7',a.textContent);
+    });
+    overlay.style.display='none';       
+  }
+  function modifier() {
     var url = new URL(document.location.href);
-  var name1 = url.searchParams.get("film");
-  getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id='+name1;
+    var name1;
+    if ( url.searchParams.get("serie") == null) {
+      est_film="film";
+      name1 = url.searchParams.get("film");
+    }else{
+      name1 = url.searchParams.get("serie");
+      est_film="serie";
+    }
+    var titre = document.getElementById("titre").value;
+    var resume = document.getElementById("resume").value;
+    //var image = document.getElementById("imagefilm").value;
+    var categorie = document.getElementById("categorie").value;
+    /*let x = '../assets/'
+    for(let i=12; i < image.length;i++){
+      x += image[i];
+    }*/
+
+    let data = JSON.stringify({
+      id: parseInt(name1),
+      titre: titre,
+      lien_vid: 'E',
+      cat: categorie,
+      res: resume,
+      lien: lien_image,
+      type: est_film
+    });
+    console.log("data",data);
+    modifierFillmUrl = 'http://localhost/projetM1/projet_Netflix/Controleur/modifierFillm.php';
+  
+    fetch(modifierFillmUrl,
+    {
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: data
+    })
+    .then(function (response) {
+        //console.log('reponse',response  ,"response",response)
+        return response.json();
+    })
+    .then(function (myJson) {
+      console.log(myJson)
+        if (myJson.state == "film updaté") {
+          document.location.href="./admin.html"; 
+        }
+    })
+  }
+
+  var url = new URL(document.location.href);
+  var name1;
+  if ( url.searchParams.get("serie") == null) {
+    name1 = url.searchParams.get("film");
+    getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id='+name1;
+  }else{
+    name1 = url.searchParams.get("serie");
+    getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php?id='+name1;
+  }  
+  
   fetch(getFilmPrecis)
   .then(function (response) {
       //console.log('reponse',getFilm,"response",response)
@@ -139,6 +205,8 @@
     //console.log(myJson,"ip",myJson);
     myJson.forEach(element => {
       image = element.lien;
+      lien_image = element.lien;
+      document.getElementById("categorie").selectedIndex = element.categorie-1;
       document.getElementById("imgback").style.backgroundImage = "url("+element.lien+")";
       document.getElementById("titre").value = element.titre;
       document.getElementById("resume").value = element.resume;
@@ -148,43 +216,5 @@
     console.log("Error: " + error);
   });
 
-  function add()
-    {
-      var titre = document.getElementById("titre").value;
-      var resume = document.getElementById("resume").value;
-      var image = document.getElementById("imagefilm").value;
-      let x = '../assets/'
-      for(let i=12; i < image.length;i++){
-        x += image[i];
-      }
-      let data = JSON.stringify({
-        titre: titre,
-        lien_vid: 'TEST',
-        cat: '3',
-        res: resume,
-        lien: x
-      });
-      console.log("data",data)
-      modifierFillmUrl = 'http://localhost/projetM1/projet_Netflix/Controleur/modifierFillm.php';
-    
-      fetch(modifierFillmUrl,
-      {
-          headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-          },
-          method: "POST",
-          body: data
-      })
-      .then(function (response) {
-          //console.log('reponse',response  ,"response",response)
-          return response.json();
-      })
-      .then(function (myJson) {
-        console.log(myJson)
-          if (myJson.state == "inscrit") {
-            console.log()
-          }
-      })
-    }
-  </script>
+  
+</script>

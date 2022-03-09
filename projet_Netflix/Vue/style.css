@@ -191,9 +191,9 @@ header {
 
 .box a:hover {
   transition: transform .3s;
-  -ms-transform: scale(1.4);
-  -webkit-transform: scale(1.4);  
-  transform: scale(1.4);
+  -ms-transform: scale(1.2);
+  -webkit-transform: scale(1.2);  
+  transform: scale(1.2);
 }
 
 .box img {
@@ -335,8 +335,8 @@ footer {
 
   .box a:hover {
     transition: transform .3s;
-    -ms-transform: scale(1);
-    -webkit-transform: scale(1);  
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);  
     transform: scale(1.2);
   }
 
@@ -607,6 +607,9 @@ a{
 }
 .espaceTop{
   margin-top: 10px;
+}
+.espacegauche{
+  margin-left: 10px;
 }
 .flooter{
   color: white;
