@@ -30,10 +30,10 @@
     <!-- MAIN CONTAINER -->
     <div class="main-container" >
       <div class="top" >
-        <section class="film">
-          <input class="commentaire-fond input-popup" value="Dune"><br>
-          <textarea rows="5" cols="50" class="commentaire-fond input-popup">Description</textarea><br>
-          <a href=""><button class="btn">Enregistrer ⬇️</button></a>
+        <section class="film" id="imgback">
+          <input class="commentaire-fond input-popup" value="Dune"  id="titre"><br>
+          <textarea rows="5" cols="50" class="commentaire-fond input-popup"  id="resume">Description</textarea><br>
+          <a href=""><button class="btn" onclick="add()">Enregistrer ⬇️</button></a>
           <a href=""><button class="btn">Supprimer ❌</button></a><br>
           <a href="watch.html"><button class="btn">Reagarder ►</button></a>
           <a href="reserver.html"><button class="btn">Réserver 📅</button></a>
@@ -83,7 +83,7 @@
 </body>
 </html>
 <script>
-  let ancien,dateReservation;
+  let ancien,dateReservation, image;
 
   var btnPopup = document.getElementById('ajouter');
   var overlay = document.getElementById('overlay');
@@ -125,5 +125,66 @@
         affichageResvesation('a7',a.textContent);
       });
       overlay.style.display='none';       
+    }
+
+    var url = new URL(document.location.href);
+  var name1 = url.searchParams.get("film");
+  getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id='+name1;
+  fetch(getFilmPrecis)
+  .then(function (response) {
+      //console.log('reponse',getFilm,"response",response)
+    return response.json();
+  })
+  .then(function (myJson) {
+    //console.log(myJson,"ip",myJson);
+    myJson.forEach(element => {
+      image = element.lien;
+      document.getElementById("imgback").style.backgroundImage = "url("+element.lien+")";
+      document.getElementById("titre").value = element.titre;
+      document.getElementById("resume").value = element.resume;
+    });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+
+  function add()
+    {
+      var titre = document.getElementById("titre").value;
+      var resume = document.getElementById("resume").value;
+      var image = document.getElementById("imagefilm").value;
+      let x = '../assets/'
+      for(let i=12; i < image.length;i++){
+        x += image[i];
+      }
+      let data = JSON.stringify({
+        titre: titre,
+        lien_vid: 'TEST',
+        cat: '3',
+        res: resume,
+        lien: x
+      });
+      console.log("data",data)
+      modifierFillmUrl = 'http://localhost/projetM1/projet_Netflix/Controleur/modifierFillm.php';
+    
+      fetch(modifierFillmUrl,
+      {
+          headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: data
+      })
+      .then(function (response) {
+          //console.log('reponse',response  ,"response",response)
+          return response.json();
+      })
+      .then(function (myJson) {
+        console.log(myJson)
+          if (myJson.state == "inscrit") {
+            console.log()
+          }
+      })
     }
   </script>

@@ -144,7 +144,7 @@
   .then(function (myJson) {
     //console.log(myJson,"ip",myJson);
     myJson.forEach(element => {
-      document.getElementById("imgback").style.backgroundImage = "url("+element.lien_image+")";
+      document.getElementById("imgback").style.backgroundImage = "url("+element.lien+")";
       document.getElementById("titre").textContent += element.titre;
       document.getElementById("resume").textContent = element.resume;
   });

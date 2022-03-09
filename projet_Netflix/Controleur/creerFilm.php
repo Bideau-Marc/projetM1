@@ -9,11 +9,10 @@
     $lien = $data['lien'];
 
     $type = $data['type'];
-
     if($type == 'serie')
-        $request = "INSERT INTO `film`(`titre`, `lien_video`, `categorie`, `resume`, `lien`) VALUES ('$titre','$lien_vid','$cat','$cat','$lien')";
-    else
         $request = "INSERT INTO `serie`(`titre`, `lien_video`, `categorie`, `resume`, `lien`) VALUES ('$titre','$lien_vid','$cat','$cat','$lien')";
+    else
+        $request = "INSERT INTO `film`(`titre`, `lien_video`, `categorie`, `resume`, `lien`) VALUES ('$titre','$lien_vid','$cat','$cat','$lien')";
     $response = array();
     if ($result=mysqli_query($conn,$request)) {
         echo '{"state":"film créé"}';

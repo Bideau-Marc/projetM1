@@ -31,20 +31,7 @@
     <section class="main-container" >
       <div class="location" id="home">
         <h1 id="">Tout les films <button class="btn-delete" id="ajouter">+ Ajouter</button></h1>
-        <div class="box">
-          <a href="admin-modifier.html"><img src="../assets/duen-affiche.jpg" alt=""></a>
-          <a href=""><img src="../assets/heureux.jpg" alt=""></a>
-          <a href=""><img src="../assets/spider.jpg" alt=""></a>
-          <a href=""><img src="../assets/super-heros.jpg" alt=""></a>
-          <a href=""><img src="../assets/marvel.jpg" alt=""></a>
-          <a href=""><img src="../assets/titanic.jpg" alt=""></a>
-  
-          <a href="admin-modifier.html"><img src="../assets/titanic.jpg" alt=""></a>
-          <a href=""><img src="../assets/super-heros.jpg" alt=""></a>
-          <a href=""><img src="../assets/marvel.jpg" alt=""></a>
-          <a href=""><img src="../assets/heureux.jpg" alt=""></a>
-          <a href=""><img src="../assets/spider.jpg" alt=""></a>
-          <a href=""><img src="../assets/duen-affiche.jpg" alt=""></a>      
+        <div class="box" id="films">      
         </div>
       </div>
         
@@ -52,8 +39,8 @@
         <div id="overlay" class="overlay">
           <div id="popup" class="popup ajouterfilm">
             <span id="btnClose" onclick="closeModal()" class="btnClose">❌</span>              
-            <input class="commentaire-fond input-popup" id="addfilm" placeholder="Titre du film">              
-            <textarea rows="6" class="commentaire-fond input-popup">Description</textarea>
+            <input class="commentaire-fond input-popup" id="addTitre" placeholder="Titre du film">              
+            <textarea rows="6" class="commentaire-fond input-popup" id="addResume">Description</textarea>
             <p>Image film :</p>
             <input class="commentaire-fond-sansMargin input-popup" type="file" id="imagefilm"><br>
             <button class="btnPopup" onclick="add()">Enregistrer ⬇️</button>
@@ -82,6 +69,7 @@
       document.getElementById("listeReservation").hidden = false;
       document.getElementById(a).style.backgroundColor = "#ffffff27";
       document.getElementById('inputDate').value = text;
+      
       this.dateReservation = a;
       if (this.ancien != null) {
         document.getElementById(this.ancien).style.backgroundColor = "";
@@ -103,13 +91,64 @@
     }
     function add()
     {
-      var a = document.createElement('a');
-      a.textContent = document.getElementById('addseance').value;
-      a.id = "a7";
-      document.getElementById('listeDate').append(a);
-      a.addEventListener("click", () => {
-        affichageResvesation('a7',a.textContent);
+      var titre = document.getElementById("addTitre").value;
+      var resume = document.getElementById("addResume").value;
+      var image = document.getElementById("imagefilm").value;
+      let x = '../assets/'
+      for(let i=12; i < image.length;i++){
+        x += image[i];
+      }
+      let data = JSON.stringify({
+        titre: titre,
+        lien_vid: 'TEST',
+        cat: 3,
+        res: resume,
+        lien: x,
+        type: 'film'
       });
-      overlay.style.display='none';       
+      console.log("data",data)
+      creerFilmUrl = 'http://localhost/projetM1/projet_Netflix/Controleur/creerFilm.php';
+    
+      fetch(creerFilmUrl,
+      {
+          headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: data
+      })
+      .then(function (response) {
+          //console.log('reponse',response  ,"response",response)
+          return response.json();
+      })
+      .then(function (myJson) {
+        console.log(myJson)
+          if (myJson.state == "film créé") {
+              console.log("la")
+          }
+      })
     }
+
+  getFilm ='http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php';
+  fetch(getFilm)
+  .then(function (response) {
+      //console.log('reponse',getFilm,"response",response)
+    return response.json();
+  })
+  .then(function (myJson) {
+    //console.log(myJson,"ip",myJson);
+    myJson.forEach(element => {
+      //console.log(element,"jesuisle5emeElmeent");
+      let a  = document.createElement('a');
+      let img  = document.createElement('img');
+      img.src = element.lien;
+      a.append(img);
+      a.href='admin-modifier.html'+"?film="+element.id;
+      document.getElementById("films").append(a);
+  });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
   </script>
