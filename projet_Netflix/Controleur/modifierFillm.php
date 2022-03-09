@@ -11,9 +11,9 @@
     $type = $data['type'];
 
     if($type == 'serie')
-        $request = "UPDATE `film` SET titre='$titre', lien_video='$lien_vid',categorie='$cat',resume='$res',lien='$lien' WHERE id='$id'";
+        $request = "UPDATE `serie` SET titre='$titre', lien_video='$lien_vid',categorie='$cat',resume='$res',lien='$lien' WHERE id='$id'";
     else
-        $request = "UPDATE 'serie' SET titre='$titre', lien_video='$lien_vid',categorie='$cat',resume='$res',lien='$lien' WHERE id='$id'";
+        $request = "UPDATE 'film' SET titre='$titre', lien_video='$lien_vid',categorie='$cat',resume='$res',lien='$lien' WHERE id='$id'";
     $response = array();
     if ($result=mysqli_query($conn,$request)) {
         echo '{"state":"film updaté"}';

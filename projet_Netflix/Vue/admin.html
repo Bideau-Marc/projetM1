@@ -33,6 +33,9 @@
         <h1 id="">Tout les films <button class="btn-delete" id="ajouter">+ Ajouter</button></h1>
         <div class="box" id="films">      
         </div>
+        <h1 id="">Tout les séries</h1>
+        <div class="box" id="series">      
+        </div>
       </div>
         
       <div class="location" id="home" >
@@ -40,7 +43,23 @@
           <div id="popup" class="popup ajouterfilm">
             <span id="btnClose" onclick="closeModal()" class="btnClose">❌</span>              
             <input class="commentaire-fond input-popup" id="addTitre" placeholder="Titre du film">              
-            <textarea rows="6" class="commentaire-fond input-popup" id="addResume">Description</textarea>
+            <textarea rows="6" class="commentaire-fond input-popup" id="addResume" placeholder="Résumer du film"></textarea>
+            <select class="commentaire-fond input-popup" name="categorie" id="categorie">
+              <option value="">Choisissez une catégorie</option>
+              <option value="1">Action</option>
+              <option value="2">Fantastique</option>
+              <option value="3">Humour</option>
+              <option value="4">Horreur</option>
+              <option value="5">Amour</option>
+            </select>
+            <div class="espaceTop">
+              <input type="radio" id="film" name="drone" value="huey" checked>
+              <label for="huey">Film</label>
+            </div>
+            <div>
+              <input type="radio" id="serie" name="drone" value="dewey">
+              <label for="dewey">Séries</label>
+            </div>
             <p>Image film :</p>
             <input class="commentaire-fond-sansMargin input-popup" type="file" id="imagefilm"><br>
             <button class="btnPopup" onclick="add()">Enregistrer ⬇️</button>
@@ -94,19 +113,27 @@
       var titre = document.getElementById("addTitre").value;
       var resume = document.getElementById("addResume").value;
       var image = document.getElementById("imagefilm").value;
+      var categorie = document.getElementById("categorie").value;
+      var film = document.getElementById("film").checked;
+      var serie = document.getElementById("serie").checked;
       let x = '../assets/'
+      if (film == true) {
+        film = 'film';
+      }else{
+        film = 'serie';
+      }
       for(let i=12; i < image.length;i++){
         x += image[i];
       }
       let data = JSON.stringify({
         titre: titre,
-        lien_vid: 'TEST',
-        cat: 3,
+        lien_vid: '',
+        cat: categorie,
         res: resume,
         lien: x,
-        type: 'film'
+        type: film
       });
-      console.log("data",data)
+      console.log("data",image)
       creerFilmUrl = 'http://localhost/projetM1/projet_Netflix/Controleur/creerFilm.php';
     
       fetch(creerFilmUrl,
@@ -146,6 +173,28 @@
       a.append(img);
       a.href='admin-modifier.html'+"?film="+element.id;
       document.getElementById("films").append(a);
+  });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+
+  getSeries = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php';
+  fetch(getSeries)
+  .then(function (response) {
+      //console.log('reponse',getFilm,"response",response)
+    return response.json();
+  })
+  .then(function (myJson) {
+    //console.log(myJson,"ip",myJson);
+    myJson.forEach(element => {
+      //console.log(element.lien_image,"jesuisle5emeElmeent");
+      let a  = document.createElement('a');
+      let img  = document.createElement('img');
+      img.src = element.lien;
+      a.append(img);
+      a.href='admin-modifier.html'+"?film="+element.id;
+      document.getElementById("series").append(a);
   });
   })
   .catch(function (error) {
