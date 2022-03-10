@@ -30,35 +30,17 @@
     
     <!-- MAIN CONTAINER -->
     <section class="main-container" >
-      <div class="location" id="home">
-        <h1 id="Recommandation">Films à l'affiche</h1>
-        <div class="box">
-          <a id="id1"><img src="../assets/netflix_violet.png" alt=""></a>
-          <a id="id2"><img src="../assets/netflix_violet.png" alt=""></a>
-          <a href=""><img src="../assets/netflix_violet.png" alt=""></a>
-          <a href=""><img src="../assets/netflix_violet.png" alt=""></a>
-          <a href=""><img src="../assets/netflix_violet.png" alt=""></a>
-          <a href=""><img src="../assets/netflix_violet.png" alt=""></a>
-  
-          <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p7.PNG?raw=true" alt=""></a>
-          <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p8.PNG?raw=true" alt=""></a>
-          <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p9.PNG?raw=true" alt=""></a>
-          <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p10.PNG?raw=true" alt=""></a>
-          <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p11.PNG?raw=true" alt=""></a>
-          <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p12.PNG?raw=true" alt=""></a>        
-        </div>
-      </div>
-      <div class="location" id="home">
-        <h1 id="Recommandation">Films que vous avez réserver</h1>
-        <div class="box">
-          <a id="r1"><img src="../assets/netflix_violet.png" alt=""></a>
-          <a id="r2"><img src="../assets/netflix_violet.png" alt=""></a>
-          <a href=""><img src="../assets/netflix_violet.png" alt=""></a>
-          <a href=""><img src="../assets/netflix_violet.png" alt=""></a>
-          <a href=""><img src="../assets/netflix_violet.png" alt=""></a>
-          <a href=""><img src="../assets/netflix_violet.png" alt=""></a>       
-        </div>
-      </div>
+      <h1 id="Recommandation">Séances</h1>
+      <section class="film-reserve" id="r1">
+        <h1 class="title">Dune</h1>
+        <p class="pitch-subtitle">Séance réservée le lundi 15 novembre 15h06</p>
+        <button class="btn" onclick="annuler('r1')">Annuler la séance ❌</button>
+      </section>
+      <section class="film-reserve" id="r2">
+        <h1 class="title">Super-héros</h1>
+        <p class="pitch-subtitle">Séance réservée le Samedi 20 novembre 20H31</p>
+        <button class="btn" onclick="annuler('r2')">Annuler la séance ❌</button>
+      </section>
     </section>
 
     <div id="overlay" class="overlay">
@@ -104,4 +86,25 @@
   function closeModal() {
     overlay.style.display='none';
   }
+  getSeances ='http://localhost/projetm1/projet_Netflix/Controleur/getSeance.php';
+  fetch(getSeances)
+  .then(function (response) {
+      //console.log('reponse',getFilm,"response",response)
+    return response.json();
+  })
+  .then(function (myJson) {
+    //console.log(myJson,"ip",myJson);
+    myJson.forEach(element => {
+      console.log(element,"jesuisle5emeElmeent");
+      let a  = document.createElement('a');
+      let img  = document.createElement('img');
+      img.src = element.lien;
+      a.append(img);
+      a.href='watch.html'+"?film="+element.id;
+      document.getElementById("films").append(a);
+  });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
 </script>
