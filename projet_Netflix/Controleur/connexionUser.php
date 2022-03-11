@@ -15,7 +15,7 @@ while($row = mysqli_fetch_assoc($result))
 if ($result=mysqli_query($conn,$request)) {
     $rowcount=mysqli_num_rows($result);
     if($rowcount>0){
-        echo "[{ 'id':$id,'state':'permited}]";
+        echo '[{ "id":'.$id.',"state":"permited"}]';
     }
     else{
         echo '[{"state":"denied"}]';

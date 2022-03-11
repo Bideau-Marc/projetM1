@@ -1,0 +1,1 @@
+select * from film f, favori ff, categorie fff, user ffff where f.id = ff.id_film and f.categorie = fff.id and ffff.id = ff.idUtilisateur and ff.idUtilisateur =12
