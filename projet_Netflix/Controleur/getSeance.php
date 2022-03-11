@@ -16,18 +16,18 @@ require("connexion.php");
     else{
       if($id==null){
         if($type == 'serie'){
-          $query = "SELECT * FROM seance s, serie se where s.id_serie = se.id";
+          $query = "SELECT * FROM seance s, serie se where s.id_serie = se.id s.date  <NOW()";
         }
         else{
-          $query = "SELECT * FROM seance s, film f where s.id_film = f.id" ;
+          $query = "SELECT * FROM seance s, film f where s.id_film = f.id and s.date  <NOW()" ;
         }
       }
       else{
         if($type == 'serie'){
-          $query = "SELECT * FROM seance s, serie se where s.id_serie = se.id and se.id='$id'";
+          $query = "SELECT * FROM seance s, serie se where s.id_serie = se.id and se.id='$id' and s.date  <NOW()";
         }
         else{
-          $query = "SELECT * FROM seance s, film f where s.id_film = f.id and f.id='$id'";
+          $query = "SELECT * FROM seance s, film f where s.id_film = f.id and f.id='$id' and s.date  <NOW()";
         }
       }
     }
