@@ -31,10 +31,8 @@
     <section class="main-container" >
       <div>
         <section class="film">
-          <h1 class="pitch-title">Réserver le film <a onclick="favori()" id="favori">★</a></h1>
-          <p class="pitch-subtitle">Description</p>
-          <a href="watch.html"><button class="btn">Reagarder ►</button></a>
-          <a href="reserver.html"><button class="btn">Réserver 📅</button></a>
+          <h1 class="pitch-title" id="titre"><a onclick="favori()" id="favori">★</a></h1>
+          <p class="pitch-subtitle" id="resume"></p>
         </section>
       </div>
       
@@ -103,4 +101,42 @@
       fav.style.color = "";
     }    
   }
+
+  var est_film;
+  var url = new URL(document.location.href);
+  if ( url.searchParams.get("serie") == null) {
+      est_film="film";
+      name1 = url.searchParams.get("idserie");
+    }else{
+      name1 = url.searchParams.get("idfilm");
+      est_film="serie";
+    }
+  getSeances ='http://localhost/projetM1/projet_Netflix/Controleur/getSeance.php';
+  let data = JSON.stringify({
+      id: name1,
+      type: est_film,
+      idSeance: null
+    });
+    console.log("data",data);  
+    fetch(getSeances,
+    {
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: data
+    })
+    .then(function (response) {
+        //console.log('reponse',response  ,"response",response)
+        return response.json();
+    })
+    .then(function (myJson) {
+      myJson.forEach(element => {
+             
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+    });
+  });
 </script>

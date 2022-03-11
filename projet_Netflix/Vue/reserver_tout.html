@@ -30,17 +30,7 @@
     
     <!-- MAIN CONTAINER -->
     <section class="main-container" >
-      <h1 id="Recommandation">Séances</h1>
-      <section class="film-reserve" id="r1">
-        <h1 class="title">Dune</h1>
-        <p class="pitch-subtitle">Séance réservée le lundi 15 novembre 15h06</p>
-        <button class="btn" onclick="annuler('r1')">Annuler la séance ❌</button>
-      </section>
-      <section class="film-reserve" id="r2">
-        <h1 class="title">Super-héros</h1>
-        <p class="pitch-subtitle">Séance réservée le Samedi 20 novembre 20H31</p>
-        <button class="btn" onclick="annuler('r2')">Annuler la séance ❌</button>
-      </section>
+      <h1 id="seances">Séances</h1>
     </section>
 
     <div id="overlay" class="overlay">
@@ -75,35 +65,99 @@
     property.style.backgroundColor = "#FFFFFF";
     property.style.color = "#000000";
   }
-  var btnPopup = document.getElementById('id1');
-  var overlay = document.getElementById('overlay');
-  btnPopup.addEventListener('click',openMoadl);
-  function openMoadl() {
-    document.location.href="./reserver.html";
-  }
+  var overlay = document.getElementById('overlay');  
   var btnClose = document.getElementById('btnClose');
   btnClose.addEventListener('click',closeModal);
   function closeModal() {
     overlay.style.display='none';
   }
-  getSeances ='http://localhost/projetm1/projet_Netflix/Controleur/getSeance.php';
-  fetch(getSeances)
-  .then(function (response) {
-      //console.log('reponse',getFilm,"response",response)
-    return response.json();
-  })
-  .then(function (myJson) {
-    //console.log(myJson,"ip",myJson);
-    myJson.forEach(element => {
-      console.log(element,"jesuisle5emeElmeent");
-      let a  = document.createElement('a');
-      let img  = document.createElement('img');
-      img.src = element.lien;
-      a.append(img);
-      a.href='watch.html'+"?film="+element.id;
-      document.getElementById("films").append(a);
+  getSeances ='http://localhost/projetM1/projet_Netflix/Controleur/getSeance.php';
+  let data = JSON.stringify({
+      id: null,
+      type: 'film',
+      idSeance: null
+    });
+    console.log("data",data);  
+    fetch(getSeances,
+    {
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: data
+    })
+    .then(function (response) {
+        //console.log('reponse',response  ,"response",response)
+        return response.json();
+    })
+    .then(function (myJson) {
+      myJson.forEach(element => {
+        let section  = document.createElement('section');
+        let h1  = document.createElement('h1');
+        let p  = document.createElement('p');
+        let button  = document.createElement('button');
+        
+        section.className = 'film-reserve'; 
+        h1.className = 'title';
+        p.className = 'pitch-subtitle';
+        button.className = 'btn';
+        h1.textContent = element.titre_seance;
+        p.textContent = element.date;
+        section.style.backgroundImage = "url("+element.lien+")";
+        button.textContent = 'Réserver 📅';
+        button.onclick = function(){
+          location.replace("./reserver.html?idfilm="+element.id); 
+        };
+        section.append(h1,p,button);
+        document.getElementById("seances").append(section);
+      });
+      
+    })
+  .catch(function (error) {
+    console.log("Error: " + error);
   });
-  })
+  let dataseries = JSON.stringify({
+      id: null,
+      type: 'serie',
+      idSeance: null
+    });
+  fetch(getSeances,
+    {
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: dataseries
+    })
+    .then(function (response) {
+        //console.log('reponse',response  ,"response",response)
+        return response.json();
+    })
+    .then(function (myJson) {
+      myJson.forEach(element => {
+        let section  = document.createElement('section');
+        let h1  = document.createElement('h1');
+        let p  = document.createElement('p');
+        let button  = document.createElement('button');
+        
+        section.className = 'film-reserve'; 
+        h1.className = 'title';
+        p.className = 'pitch-subtitle';
+        button.className = 'btn';
+        h1.textContent = element.titre_seance;
+        p.textContent = element.date;
+        section.style.backgroundImage = "url("+element.lien+")";
+        button.textContent = 'Réserver 📅';
+        button.onclick = function(){
+          location.replace("./reserver.html"); 
+        };
+        section.append(h1,p,button);
+        document.getElementById("seances").append(section);
+      });
+      
+    })
   .catch(function (error) {
     console.log("Error: " + error);
   });

@@ -40,6 +40,7 @@
             <option value="4">Horreur</option>
             <option value="5">Amour</option>
           </select>
+          <input class="commentaire-fond-sansMargin input-popup espacegauche" type="file" id="imagefilm">
           <br>
           <a><button class="btn" onclick="modifier()">Enregistrer ⬇️</button></a>
           <a><button class="btn">Supprimer ❌</button></a><br>
@@ -108,7 +109,7 @@
     if (this.ancien != null) {
       document.getElementById(this.ancien).style.backgroundColor = "";
     }
-    this.ancien = a;        
+    this.ancien = a;
   }
   function deletePersonne(a)
   {
@@ -146,12 +147,12 @@
     }
     var titre = document.getElementById("titre").value;
     var resume = document.getElementById("resume").value;
-    //var image = document.getElementById("imagefilm").value;
+    var image = document.getElementById("imagefilm").value;
     var categorie = document.getElementById("categorie").value;
-    /*let x = '../assets/'
+    let x = '../assets/'
     for(let i=12; i < image.length;i++){
       x += image[i];
-    }*/
+    }
 
     let data = JSON.stringify({
       id: parseInt(name1),
@@ -159,7 +160,7 @@
       lien_vid: 'E',
       cat: categorie,
       res: resume,
-      lien: lien_image,
+      lien: x,
       type: est_film
     });
     console.log("data",data);
