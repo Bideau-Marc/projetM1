@@ -133,7 +133,8 @@
     })
     .then(function (myJson) {
       myJson.forEach(element => {
-             
+        document.getElementById("titre").textContent += element.titre_seance;
+        document.getElementById("resume").textContent = element.resume;
     })
     .catch(function (error) {
       console.log("Error: " + error);
