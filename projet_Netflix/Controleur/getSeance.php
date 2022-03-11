@@ -24,11 +24,21 @@ switch($request_method)
     $data = json_decode(file_get_contents('php://input'),true);
     $id=$data['id'];
     $type = $data['type'];
-    if($type == 'serie'){
-      $query = "SELECT * FROM seance s, serie se where s.id_serie = se.id and se.id='$id'";
+    if($id==null){
+      if($type == 'serie'){
+        $query = "SELECT * FROM seance s, serie se where s.id_serie = se.id";
+      }
+      else{
+        $query = "SELECT * FROM seance s, film f where s.id_film = f.id" ;
+      }
     }
     else{
-      $query = "SELECT * FROM seance s, film f where s.id_film = f.id and f.id='$id'";
+      if($type == 'serie'){
+        $query = "SELECT * FROM seance s, serie se where s.id_serie = se.id and se.id='$id'";
+      }
+      else{
+        $query = "SELECT * FROM seance s, film f where s.id_film = f.id and f.id='$id'";
+      }
     }
     $response = array();
     $result = mysqli_query($conn, $query);
