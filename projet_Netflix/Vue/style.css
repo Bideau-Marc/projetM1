@@ -26,6 +26,7 @@
   padding-top: 60px; 
 }
 .title {
+  width: 50%;
 	font-size: 3em;
 	margin: 10px;
 	font-weight: 700;
@@ -622,4 +623,12 @@ a{
 .bottom{
   position: absolute;
   bottom: 0;
+}
+.resever{}
+.resever:hover{
+  background-color: #FFFFFF;
+  color: #000000;
+}
+.input-nb{
+  width: 50%;
 }

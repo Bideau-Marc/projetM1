@@ -54,10 +54,12 @@
         body: data
     })
     .then(function (response) {
-        //console.log('reponse',response  ,"response",response)
+        //console.log("repons",response  ,"response",response)
         return response.json();
     })
     .then(function (myJson) {
+        console.log(myJson[0]);
+        localStorage.setItem("idUser",myJson[0].id);
         if (myJson[0].state == "permited") {
             document.location.href = "./accueil.html"; 
         }

@@ -30,34 +30,22 @@
     <!-- MAIN CONTAINER -->
     <section class="main-container" >
       <div>
-        <section class="film">
-          <h1 class="pitch-title" id="titre"><a onclick="favori()" id="favori">★</a></h1>
+        <section class="film" id="imgback">
+          <h1 class="pitch-title"><span id="titre"></span><a onclick="favori()" id="favori">★</a></h1>
           <p class="pitch-subtitle" id="resume"></p>
         </section>
       </div>
       
       <div class="location" id="home">
         <h1 id="home">Date réservation</h1>
-        <div class="box">
-          <a onclick="changerCouleur()" id="bloc1">Lundi 15 novembre 15h06 <span id="a1"></span></a>
-          <a>Lundi 15 novembre 15h06</a>
-          <a>Lundi 18 novembre 15h06</a>
-          <a>Lundi 15 novembre 15h06</a>
-          <a>Lundi 15 novembre 15h06</a>
-          <a>Lundi 15 novembre 15h06</a>
-          <a>Lundi 15 novembre 15h06</a>
+        <div class="box" id="seances">
         </div>
       </div>
     </section>
 
-    <div id="overlay" class="overlay">
-      <div id="popup" class="popup">
-        <h2>
-        Plus de places / Complet
-        <span id="btnClose" class="btnClose">&times;</span>
-        </h2>        
-      </div>
-    </div>
+    <center>
+      <button class="btn" onclick="enregistrer()">Enregistrer ⬇️</button>
+    </center>
 
     <footer>
       <a href="./contact.html" class="flooter">Contact</a>
@@ -68,27 +56,24 @@
 <script>
   Boolean: favari = false;
   Boolean: reserver = false;
-  Number: reserver = 0;
+  Number: reserver = 1;
   Number: reserverMax = 12;
-  function changerCouleur()
+  var nb_seance;
+  function changerCouleur(bloc,span)
   {
-    var property = document.getElementById("a1");
-    var bloc1 = document.getElementById("bloc1");
-    if(reserver){
-      if (reserver >= reserverMax) {
-      }else{
-        reserver ++;
-        property.textContent =" ✅ "+reserver +" Places réservés";
-        bloc1.style.backgroundColor = "#FFFFFF";
-        bloc1.style.color = "#000000";
-      }      
+    var nb = document.getElementById(span).textContent[3];
+    
+    console.log(nb)
+    if (nb >= 1) {
+      nb++;
+      document.getElementById(span).textContent =" ✅ "+nb +" Places réservés";
     }else{
-      reserver ++;
-      property.textContent += " ✅";
-      bloc1.style.backgroundColor = "#FFFFFF";
-      bloc1.style.color = "#000000";
+      document.getElementById(span).textContent =" ✅ "+reserver +" Places réservés";
     }
     
+    
+    document.getElementById(bloc).style.backgroundColor = "white";
+    document.getElementById(bloc).style.color = "#000000";
   }
   function favori()
   {
@@ -101,14 +86,51 @@
       fav.style.color = "";
     }    
   }
+  function enregistrer()
+  {
+    addSeances ='http://localhost/projetM1/projet_Netflix/Controleur/addResa.php';
+    for (let i = 0; i < nb_seance; i++) {
+      var nbplaces = document.getElementById("nb"+i).value;
+      var idfilm = document.getElementById("bloc"+i).value;
+      if (nbplaces != 0) {
+         console.log(nbplaces, idfilm);
+        let data = JSON.stringify({
+          idUser: localStorage.getItem("idUser"),
+          idSeance: idfilm,
+          nbPlaceRes: nbplaces
+        });
+        console.log("data",data);  
+        fetch(addSeances,
+        {
+          headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: data
+        })
+        .then(function (response) {
+            //console.log('reponse',response  ,"response",response)
+            return response.json();
+        })
+        .then(function (myJson) {
+          console.log("l");
+        })
+        .catch(function (error) {
+          console.log("Error: " + error);
+        });
+        
+      }
+    }
+  }
 
   var est_film;
   var url = new URL(document.location.href);
-  if ( url.searchParams.get("serie") == null) {
+  if ( url.searchParams.get("idserie") == null) {
       est_film="film";
-      name1 = url.searchParams.get("idserie");
-    }else{
       name1 = url.searchParams.get("idfilm");
+    }else{
+      name1 = url.searchParams.get("idserie");
       est_film="serie";
     }
   getSeances ='http://localhost/projetM1/projet_Netflix/Controleur/getSeance.php';
@@ -132,9 +154,34 @@
         return response.json();
     })
     .then(function (myJson) {
-      myJson.forEach(element => {
-        document.getElementById("titre").textContent += element.titre_seance;
-        document.getElementById("resume").textContent = element.resume;
+      nb_seance = myJson.length;
+      document.getElementById("imgback").style.backgroundImage = "url("+myJson[0].lien+")";
+      document.getElementById("titre").textContent = myJson[0].titre_seance;
+      document.getElementById("resume").textContent = myJson[0].resume;
+      myJson.forEach((element,index) => {
+        console.log(element)
+        let a  = document.createElement('a');
+        let input  = document.createElement('input');
+        a.className ='resever';
+        a.id='bloc'+index;
+        if (est_film == "film") {
+          a.value = element.id_film;
+        }else{
+          a.value = element.id_serie;
+        }
+        a.textContent = element.date +"\nnombre de places réservés : ";
+        input.className = 'input-nb';
+        input.type ='number';
+        input.id = 'nb'+index;
+        input.value = 0;
+        input.min = 0;
+        input.max = element.nb_place;
+        
+        a.append(input);
+        document.getElementById("seances").append(a);
+        a.onclick = function(){
+         // changerCouleur('bloc'+index, 'span'+index);
+        };  
     })
     .catch(function (error) {
       console.log("Error: " + error);

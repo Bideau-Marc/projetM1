@@ -104,14 +104,32 @@
   Boolean: favari = false;
   function favori()
   {
-    var fav = document.getElementById("favori");
-    if (favari == false) {
-      favari = true;
-      fav.style.color = "#FFD700";
-    }else{
-      favari = false;
-      fav.style.color = "";
-    }    
+    addfavori ='http://localhost/projetM1/projet_Netflix/Controleur/addFavori.php';
+    let data = JSON.stringify({
+      idU: 1,
+      idF: name1,
+      idS: null
+    });
+    console.log("data",data);  
+    fetch(addfavori,
+    {
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: data
+    })
+    .then(function (response) {
+      //console.log('reponse',response  ,"response",response)
+      return response.json();
+    })
+    .then(function (myJson) {
+      console.log("l");
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+    });    
   }
   var url = new URL(document.location.href);
   var name1 = url.searchParams.get("film");

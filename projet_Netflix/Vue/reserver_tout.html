@@ -151,7 +151,7 @@
         section.style.backgroundImage = "url("+element.lien+")";
         button.textContent = 'Réserver 📅';
         button.onclick = function(){
-          location.replace("./reserver.html"); 
+          location.replace("./reserver.html?idserie="+element.id); 
         };
         section.append(h1,p,button);
         document.getElementById("seances").append(section);
