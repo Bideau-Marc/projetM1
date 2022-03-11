@@ -25,10 +25,10 @@ switch($request_method)
     $id=$data['id'];
     $type = $data['type'];
     if($type == 'serie'){
-      $query = "SELECT s.* FROM seance s, serie se where s.id_serie = se.id and se.id='$id'";
+      $query = "SELECT * FROM seance s, serie se where s.id_serie = se.id and se.id='$id'";
     }
     else{
-      $query = "SELECT s.* FROM seance s, film f where s.id_film = f.id and f.id='$id'";
+      $query = "SELECT * FROM seance s, film f where s.id_film = f.id and f.id='$id'";
     }
     $response = array();
     $result = mysqli_query($conn, $query);
