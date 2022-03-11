@@ -2,24 +2,7 @@
 require("connexion.php");
 $request_method = $_SERVER["REQUEST_METHOD"];
   
-switch($request_method)
-  {
-    case 'GET':
-      if(!empty($_GET["id"]))
-      {
-        // Récupérer un seul produit
-        getProduct($id);
-      }
-      else
-      {
-        // Récupérer tous les produits
-        getProducts();
-      }
-      break;
-  }
 
-  function getProducts()
-  {
     global $conn;
     $data = json_decode(file_get_contents('php://input'),true);
     $idUser = $data['idUser'];
@@ -38,5 +21,4 @@ switch($request_method)
     }
     echo json_encode($response,JSON_PRETTY_PRINT);
     
-  }
 ?>
