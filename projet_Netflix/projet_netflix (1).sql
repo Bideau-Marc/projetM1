@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 11 mars 2022 à 11:23
+-- Généré le : mar. 05 avr. 2022 à 15:09
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -117,9 +117,7 @@ CREATE TABLE `favori` (
 --
 
 INSERT INTO `favori` (`id`, `id_film`, `idUtilisateur`, `id_serie`) VALUES
-(1, 1, 12, 1),
 (2, 1, 12, 0),
-(3, 1, 12, NULL),
 (4, NULL, 1, 1);
 
 -- --------------------------------------------------------
@@ -170,7 +168,8 @@ INSERT INTO `reservation` (`id`, `id_user`, `nombre_place_reserve`, `id_seance`)
 (1, 2, 1, 1),
 (2, 3, 2, 1),
 (3, 2, 3, 4),
-(5, 1, 7000, 5);
+(5, 1, 7000, 4),
+(6, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -180,22 +179,23 @@ INSERT INTO `reservation` (`id`, `id_user`, `nombre_place_reserve`, `id_seance`)
 
 CREATE TABLE `seance` (
   `id_seance` int(11) NOT NULL,
-  `date` date NOT NULL,
+  `date` datetime NOT NULL,
   `titre_seance` varchar(255) NOT NULL,
   `id_film` int(11) DEFAULT NULL COMMENT 'id du film',
-  `id_serie` int(11) DEFAULT NULL COMMENT 'id d''une serie '
+  `id_serie` int(11) DEFAULT NULL COMMENT 'id d''une serie ',
+  `nb_place` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `seance`
 --
 
-INSERT INTO `seance` (`id_seance`, `date`, `titre_seance`, `id_film`, `id_serie`) VALUES
-(1, '0000-00-00', 'Spider-Man : No Way Home\n', 1, NULL),
-(2, '2022-10-22', 'Spider-Man : No Way Home\n', 1, NULL),
-(3, '2022-10-26', 'Spider-Man : No Way Home\n', 1, NULL),
-(4, '2022-08-31', 'titanic', 4, NULL),
-(5, '2022-09-17', 'star wars la serie', NULL, 1);
+INSERT INTO `seance` (`id_seance`, `date`, `titre_seance`, `id_film`, `id_serie`, `nb_place`) VALUES
+(1, '0000-00-00 00:00:00', 'Spider-Man : No Way Home\n', 1, NULL, 11),
+(2, '2022-10-22 00:00:00', 'Spider-Man : No Way Home\n', 1, NULL, 4),
+(3, '2022-10-26 00:00:00', 'Spider-Man : No Way Home\n', 1, NULL, 11),
+(4, '2022-08-31 00:00:00', 'titanic', 4, NULL, 7000),
+(5, '2022-09-17 00:00:00', 'star wars la serie', NULL, 1, 100);
 
 -- --------------------------------------------------------
 
@@ -347,7 +347,7 @@ ALTER TABLE `film`
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `seance`

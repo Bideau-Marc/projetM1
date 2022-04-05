@@ -63,7 +63,7 @@
   {
     var nb = document.getElementById(span).textContent[3];
     
-    console.log(nb)
+    //console.log(nb)
     if (nb >= 1) {
       nb++;
       document.getElementById(span).textContent =" ✅ "+nb +" Places réservés";
@@ -93,8 +93,8 @@
       var nbplaces = document.getElementById("nb"+i).value;
       var idfilm = document.getElementById("bloc"+i).value;
       if (nbplaces != 0) {
-         console.log(nbplaces, idfilm);
-        let data = JSON.stringify({
+          console.log(nbplaces, idfilm);
+          let data = JSON.stringify({
           idUser: localStorage.getItem("idUser"),
           idSeance: idfilm,
           nbPlaceRes: nbplaces
@@ -139,7 +139,7 @@
       type: est_film,
       idSeance: null
     });
-    console.log("data",data);  
+    //console.log("data",data);  
     fetch(getSeances,
     {
       headers: {
@@ -159,7 +159,7 @@
       document.getElementById("titre").textContent = myJson[0].titre_seance;
       document.getElementById("resume").textContent = myJson[0].resume;
       myJson.forEach((element,index) => {
-        console.log(element)
+        //console.log(element)
         let a  = document.createElement('a');
         let input  = document.createElement('input');
         a.className ='resever';
@@ -182,9 +182,10 @@
         a.onclick = function(){
          // changerCouleur('bloc'+index, 'span'+index);
         };  
+      })
+    
     })
     .catch(function (error) {
       console.log("Error: " + error);
     });
-  });
 </script>
