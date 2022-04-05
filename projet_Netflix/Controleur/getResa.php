@@ -8,10 +8,10 @@ $request_method = $_SERVER["REQUEST_METHOD"];
     $idUser = $data['idUser'];
     $idSeance = $data['idSeance'];
     if($idUser == null){
-      $query = "SELECT * FROM reservation r, seance s where r.id_seance = s.id and s.id='$idSeance'";
+      $query = "SELECT * FROM reservation r, seance s, film f where r.id_seance = s.id and s.id='$idSeance' and f.id=s.id_film and s.date  >=NOW()";
     }
     else{
-      $query = "SELECT * FROM reservation s, user f where s.id_user = f.id and f.id='$idUser'";
+        $query = "SELECT * FROM reservation r, seance s, user f, film fi where r.id_user = f.id and f.id='$idUser'and fi.id=s.id_film and r.id_seance = s.id_seance and s.date  >=NOW()";
     }
     $response = array();
     $result = mysqli_query($conn, $query);
