@@ -1,5 +1,6 @@
 <?php
 require('connexion.php');
+$data = json_decode(file_get_contents('php://input'),true);
 $idUser = $data['idUser'];
 $idSeance = $data['idSeance'];
 $idF = $data['idFilm'];
