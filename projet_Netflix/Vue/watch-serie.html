@@ -95,18 +95,67 @@
 </body>
 </html>
 <script>
-  Boolean: favari = false;
-  let ancienbtn;
+  Boolean: favoriBoll = false;
+  let ancienbtn, favoriId;
+  function reserver(){
+    window.location.href ="reserver.html?idserie=" + idseries;
+  }
   function favori()
   {
-    var fav = document.getElementById("favori");
-    if (favari == false) {
-      favari = true;
-      fav.style.color = "#FFD700";
+    addfavori ='http://localhost/projetM1/projet_Netflix/Controleur/addFavori.php';
+    removefavori ='http://localhost/projetM1/projet_Netflix/Controleur/removeFavori.php';
+
+    if (favoriBoll == true) {
+      let data = JSON.stringify({
+        id: favoriId
+      });
+      //console.log("data",data);  
+      fetch(removefavori,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+          },
+        method: "POST",
+        body: data
+      })
+      .then(function (response) {
+        //console.log('reponse',response.status  ,"response",response)
+        if (response.status) {
+          document.getElementById("favori").style.color = 'white'
+          window.location.reload();
+        }
+      })
+      .catch(function (error) {
+        console.log("Error: " + error);
+      });
     }else{
-      favari = false;
-      fav.style.color = "";
-    }  
+      let data = JSON.stringify({
+        idU: localStorage.getItem("idUser"),
+        idF: "null",
+        idS: idseries
+      });
+      //console.log("data",data);  
+      fetch(addfavori,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+          },
+        method: "POST",
+        body: data
+      })
+      .then(function (response) {
+        //console.log('reponse',response.status  ,"response",response)
+        if (response.status) {
+          document.getElementById("favori").style.color = '#FFD700'
+          window.location.reload();
+        }
+      })
+      .catch(function (error) {
+        console.log("Error: " + error);
+      });
+    }
   }
   function saison(btn, urlimage)
   {
@@ -207,6 +256,39 @@
           break;
       }
   });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+  //get favori
+  getFavori = 'http://localhost/projetm1/projet_Netflix/Controleur/getFav.php';
+  let data = JSON.stringify({
+    idUser: localStorage.getItem("idUser"),
+    idSeance: idseries,
+    idFilm: "null"
+    });
+  fetch(getFavori,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+      method: "POST",
+      body: data
+    })
+  .then(function (response) {
+      //console.log('reponse',getFilm,"response",response)
+    return response.json();
+  })
+  .then(function (myJson) {
+    //console.log(myJson,"ip",myJson);
+    myJson.forEach(element => {
+      if (localStorage.getItem("idUser") == element.idUtilisateur) {
+        document.getElementById("favori").style.color = '#FFD700';
+        favoriBoll = true;
+        favoriId= element.id;
+      }
+    });
   })
   .catch(function (error) {
     console.log("Error: " + error);

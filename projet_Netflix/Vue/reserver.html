@@ -92,11 +92,12 @@
     for (let i = 0; i < nb_seance; i++) {
       var nbplaces = document.getElementById("nb"+i).value;
       var idfilm = document.getElementById("bloc"+i).value;
+      
       if (nbplaces != 0) {
-          console.log(nbplaces, idfilm);
+          //console.log(nbplaces, idfilm);
           let data = JSON.stringify({
           idUser: localStorage.getItem("idUser"),
-          idSeance: idfilm,
+          idSeance: name1,
           nbPlaceRes: nbplaces
         });
         console.log("data",data);

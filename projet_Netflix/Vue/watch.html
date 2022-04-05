@@ -37,7 +37,7 @@
           <h1 class="pitch-title"><span id="titre"></span><a onclick="favori()" id="favori"> ★</a></h1>
           <p class="pitch-subtitle p-resume" id="resume">Description</p>
           <a href="player.html"><button class="btn">Regarder ►</button></a>
-          <a href="reserver.html"><button class="btn">Réserver 📅</button></a>
+          <a onclick="reserver()"><button class="btn">Réserver 📅</button></a>
         </section>
       </div>
       
@@ -101,35 +101,68 @@
 </body>
 </html>
 <script>
-  Boolean: favari = false;
+  Boolean: favoriBoll = false;
+  let favoriId;
+  function reserver(){
+    window.location.href ="reserver.html?idfilm=" + name1;
+  }
   function favori()
   {
     addfavori ='http://localhost/projetM1/projet_Netflix/Controleur/addFavori.php';
-    let data = JSON.stringify({
-      idU: 1,
-      idF: name1,
-      idS: null
-    });
-    console.log("data",data);  
-    fetch(addfavori,
-    {
-      headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: data
-    })
-    .then(function (response) {
-      //console.log('reponse',response  ,"response",response)
-      return response.json();
-    })
-    .then(function (myJson) {
-      console.log("l");
-    })
-    .catch(function (error) {
-      console.log("Error: " + error);
-    });    
+    removefavori ='http://localhost/projetM1/projet_Netflix/Controleur/removeFavori.php';
+
+    if (favoriBoll == true) {
+      let data = JSON.stringify({
+        id: favoriId
+      });
+      //console.log("data",data);  
+      fetch(removefavori,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+          },
+        method: "POST",
+        body: data
+      })
+      .then(function (response) {
+        //console.log('reponse',response.status  ,"response",response)
+        if (response.status) {
+          document.getElementById("favori").style.color = 'white'
+          window.location.reload();
+        }
+      })
+      .catch(function (error) {
+        console.log("Error: " + error);
+      });
+    }else{
+      let data = JSON.stringify({
+        idU: localStorage.getItem("idUser"),
+        idF: name1,
+        idS: "null"
+      });
+      //console.log("data",data);  
+      fetch(addfavori,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+          },
+        method: "POST",
+        body: data
+      })
+      .then(function (response) {
+        //console.log('reponse',response.status  ,"response",response)
+        if (response.status) {
+          document.getElementById("favori").style.color = '#FFD700'
+          window.location.reload();
+        }
+      })
+      .catch(function (error) {
+        console.log("Error: " + error);
+      });
+    }
+        
   }
   var url = new URL(document.location.href);
   var name1 = url.searchParams.get("film");
@@ -145,6 +178,40 @@
       document.getElementById("imgback").style.backgroundImage = "url("+element.lien+")";
       document.getElementById("titre").textContent = element.titre;
       document.getElementById("resume").textContent = element.resume;
+      console.log(element)
+    });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+  //get favori
+  getFavori = 'http://localhost/projetm1/projet_Netflix/Controleur/getFav.php';
+  let data = JSON.stringify({
+    idUser: localStorage.getItem("idUser"),
+    idSeance: "null",
+    idFilm: name1
+    });
+  fetch(getFavori,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+      method: "POST",
+      body: data
+    })
+  .then(function (response) {
+      //console.log('reponse',getFilm,"response",response)
+    return response.json();
+  })
+  .then(function (myJson) {
+    //console.log(myJson,"ip",myJson);
+    myJson.forEach(element => {
+      if (localStorage.getItem("idUser") == element.idUtilisateur) {
+        document.getElementById("favori").style.color = '#FFD700';
+        favoriBoll = true;
+        favoriId= element.id;
+      }
     });
   })
   .catch(function (error) {
