@@ -11,7 +11,7 @@
         echo '{"state":"resa créé"}';
     } 
     else echo '{"state":"resa déja existant"}';
-    $request = "UPDATE `seance` SET `nb_place`=nb_place-1 WHERE id_seance = '$idSeance'";
+    $request = "UPDATE `seance` SET `nb_place`=nb_place-'$nbPlaceRes' WHERE id_seance = '$idSeance'";
     $response = array();
     if ($result=mysqli_query($conn,$request)) {     
     } 
