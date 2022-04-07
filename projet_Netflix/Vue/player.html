@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="">
-        <div class="child1"><a href="watch.html"><img src='../assets/croix.png' width="25" height="25" onclick="back()"></a></div>
+        <div class="child1"><img src='../assets/croix.png' width="25" height="25" onclick="back()"></div>
         <div class="child1 child2">
           <video width="100%$=" height="100%" controls>
             <source src="../IMG_0151 (1).MP4" type="video/MP4">
@@ -21,6 +21,7 @@
     <!-- <iframe width="1520" height="553" src="https://www.youtube.com/embed/JK9dTUBf1bI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>     -->
     <script> 
         function back(){
+          window.location.replace(localStorage.getItem('url'))
         }
     </script>
 </body>

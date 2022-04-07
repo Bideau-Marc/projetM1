@@ -36,7 +36,7 @@
         <section class="film" id="imgback">
           <h1 class="pitch-title"><span id="titre"></span><a onclick="favori()" id="favori"> ★</a></h1>
           <p class="pitch-subtitle p-resume" id="resume">Description</p>
-          <a href="player.html"><button class="btn">Regarder ►</button></a>
+          <button class="btn" onclick="saveURL()">Regarder ►</button>
           <a onclick="reserver()"><button class="btn">Réserver 📅</button></a>
         </section>
       </div>
@@ -101,6 +101,10 @@
 </body>
 </html>
 <script>
+  function saveURL(){
+    localStorage.setItem("url",window.location.href);
+    window.location.replace('player.html');
+  }
   Boolean: favoriBoll = false;
   let favoriId;
   function reserver(){
