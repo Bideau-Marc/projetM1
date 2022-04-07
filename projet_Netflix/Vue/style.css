@@ -10,7 +10,7 @@
   border-radius: 5px;
 }
 .film-reserve {
-  height: auto;
+  height: 245px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom right;
@@ -20,14 +20,14 @@
 }
 
 .pitch-title {
-	font-size: 3em;
+	font-size: 2em;
 	margin: 10px;
 	font-weight: 700;
   padding-top: 60px; 
 }
 .title {
-  width: 50%;
-	font-size: 3em;
+  width: 80%;
+	font-size: 2em;
 	margin: 10px;
 	font-weight: 700;
 }
@@ -99,6 +99,7 @@ html, body {
 
 img {
   max-width: 100%;
+  height: 245px;
 }
 
 .wrapper {
@@ -186,7 +187,7 @@ header {
 }
 
 .box a {
-  transition: transform .3s;  
+  transition: transform .3s;
 }
 
 .box a:hover {

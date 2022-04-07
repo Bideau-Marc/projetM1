@@ -52,36 +52,27 @@
       <div class="location" id="home" >
         <h1 id="home">Date réservation <button class="btn-delete" id="ajouter">+ Ajouter</button></h1>
         <div class="box" id="listeDate">
-          <a onclick="affichageResvesation('a1','Lundi 15 novembre 15h00')" id="a1">Lundi 15 novembre 15h00</a>
-          <a onclick="affichageResvesation('a2','Lundi 15 decembre 16h00')" id="a2">Lundi 15 decembre 16h00</a>
-          <a onclick="affichageResvesation('a3','Lundi 15 janvier 17h00')" id="a3">Lundi 15 janvier 17h00</a>
-          <a onclick="affichageResvesation('a4','Lundi 15 février 10h00')" id="a4">Lundi 15 février 10h00</a>
-          <a onclick="affichageResvesation('a5','Lundi 15 avril 14h00')" id="a5">Lundi 15 avril 14h00</a>
-          <a onclick="affichageResvesation('a6','Lundi 15 juin 20h00')" id="a6">Lundi 15 juin 20h00</a>
         </div>
         <div id="listeReservation" hidden>
           <h1 id="">Personne ayant réserver</h1>
-          <input class="commentaire-fond input-taille" id="inputDate">
+          <input class="commentaire-fond input-taille" type="datetime-local" id="inputDate">
+          <input class="commentaire-fond input-taille" type="number" id="nbplaces" placeholder="Nombres de places dans la séances">
           <button class="btn-delete" id="deleteSeance" onclick="deleteSeance()"> ❌ Supprimer séance</button><br>
-          <div class="box top" id="">
-            <button class="btn-delete" id="p1" onclick="deletePersonne('p1')"><p>Marc bideau</p> ❌</button>
-            <button class="btn-delete" id="p2" onclick="deletePersonne('p2')"><p>Marc bido</p>❌</button>
-            <button class="btn-delete" id="p3" onclick="deletePersonne('p3')"><p>Marc bidau</p>❌</button>
-            <button class="btn-delete" id="p4" onclick="deletePersonne('p4')"><p>Marc bideaux</p>❌</button>
-            <button class="btn-delete" id="p5" onclick="deletePersonne('p5')"><p>Marc bidaux</p>❌</button>
-            <button class="btn-delete" id="p6" onclick="deletePersonne('p6')"><p>Marc bid0</p>❌</button>
+          <div class="box top" id="user">
           </div>
         </div>
         
         <div id="overlay" class="overlay">
-          <div id="popup" class="popup dune">
-            <h2>Dune <span id="btnClose" onclick="closeModal()" class="btnClose">❌</span></h2>
-            <input class="commentaire-fond-sansMargin " id="addseance" type="date"><br>
-            <button class="btnPopup" onclick="add()">Enregistrer ⬇️</button>
+          <div id="popup" class="popup">
+            <h2><span id="btnClose" onclick="closeModal()" class="btnClose">❌</span></h2>
+            <h2 id="titreSeance"></h2>
+            <input class="commentaire-fond" id="seanceDate" type="datetime-local"><br>
+            <input class="commentaire-fond " id="seancePlaces" type="number"><br>
+            <button class="btnPopup" onclick="addSeance()">Enregistrer ⬇️</button>
           </div>
         </div>
 
-        <a href=""><button class="btn center top">Enregistrer ⬇️</button></a>
+        <a id="enregistrer" onclick="add()" hidden><button class="btn center top">Enregistrer ⬇️</button></a>
       </div>
     </div>
 
@@ -100,16 +91,60 @@
   function openMoadl() {
     overlay.style.display='block';
   }
-  function affichageResvesation(a,text)
+  function affichageResvesation(a,text,places)
   {
     document.getElementById("listeReservation").hidden = false;
+    document.getElementById("enregistrer").hidden = false;
     document.getElementById(a).style.backgroundColor = "#ffffff27";
-    document.getElementById('inputDate').value = text;
+    let idSeance = document.getElementById(a).value;
+
+    document.getElementById('inputDate').value = date(text);
+    document.getElementById("nbplaces").value = places;
     this.dateReservation = a;
     if (this.ancien != null) {
       document.getElementById(this.ancien).style.backgroundColor = "";
     }
     this.ancien = a;
+
+    document.getElementById('user').textContent = "";   
+    let data = JSON.stringify({
+      idSeance: idSeance
+    });
+    console.log("data",data);
+    getUserFromSeance = 'http://localhost/projetM1/projet_Netflix/Controleur/getUserFromSeance.php';
+  
+    fetch(getUserFromSeance,
+    {
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: data
+    })
+    .then(function (response) {
+        //console.log('reponse',response  ,"response",response)
+        return response.json();
+    })
+    .then(function (myJson) {
+      console.log(myJson)
+      myJson.forEach((element,index) => {
+        let btn  = document.createElement('a');
+        let p  = document.createElement('p');
+        p.textContent = element.nombre_place_reserve + " places réservés";
+        btn.className ='btn-delete';
+        btn.id='user'+index;
+        btn.value = element.id;
+        btn.textContent = element.login;
+
+        btn.append(p);
+        document.getElementById('user').append(btn);
+      });
+              
+    })
+    .catch(function (error) {
+    console.log("Error: " + error);
+  });
   }
   function deletePersonne(a)
   {
@@ -153,7 +188,9 @@
     for(let i=12; i < image.length;i++){
       x += image[i];
     }
-
+    if (x == '../assets/') {
+      x = lien_image;
+    }
     let data = JSON.stringify({
       id: parseInt(name1),
       titre: titre,
@@ -188,12 +225,14 @@
   }
 
   var url = new URL(document.location.href);
-  var name1;
+  var name1, est_film1;
   if ( url.searchParams.get("serie") == null) {
     name1 = url.searchParams.get("film");
+    est_film1="film";    
     getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id='+name1;
   }else{
     name1 = url.searchParams.get("serie");
+    est_film1="serie";
     getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php?id='+name1;
   }  
   
@@ -209,7 +248,9 @@
       lien_image = element.lien;
       document.getElementById("categorie").selectedIndex = element.categorie-1;
       document.getElementById("imgback").style.backgroundImage = "url("+element.lien+")";
+      document.getElementById("popup").style.backgroundImage = "url("+element.lien+")";
       document.getElementById("titre").value = element.titre;
+      document.getElementById("titreSeance").textContent = element.titre;
       document.getElementById("resume").value = element.resume;
     });
   })
@@ -217,5 +258,109 @@
     console.log("Error: " + error);
   });
 
-  
+  console.log(name1,est_film1)
+  getSeances ='http://localhost/projetM1/projet_Netflix/Controleur/getSeance.php';
+  let data = JSON.stringify({
+      id: name1,
+      type: est_film1,
+      idSeance: null
+    });
+    //console.log("data",data);  
+    fetch(getSeances,
+    {
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: data
+    })
+    .then(function (response) {
+        //console.log('reponse',response  ,"response",response)
+        return response.json();
+    })
+    .then(function (myJson) {
+      nb_seance = myJson.length;
+      myJson.forEach((element,index) => {
+        //console.log(element)
+        let a  = document.createElement('a');
+        let p  = document.createElement('p');
+        a.className ='resever';
+        a.id='a'+index;
+        if (est_film == "film") {
+          a.value = element.id_seance;
+        }else{
+          a.value = element.id_seance;
+        }
+        a.textContent = element.date +"\nnombre de places disponibles : " + element.nb_place;
+        p.className = '';
+        p.id = 'nb'+index;
+        
+        a.append(p);
+        document.getElementById("listeDate").append(a);
+        a.addEventListener("click", () => {
+          affichageResvesation('a'+index,element.date,element.nb_place);
+        });
+      })
+    
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+    });
+  function date(a){
+    let j, m, y,date,h,mim;
+    y= a[0];
+    y += a[1];
+    y += a[2];
+    y += a[3];
+    m = a[5];
+    m += a[6];
+    j = a[8];
+    j += a[9];
+    h = a[11];
+    h += a[12];
+    mim = a[14];
+    mim += a[15];
+    date = y+"-"+m+"-"+j+"T"+h+":"+mim;
+    console.log(date)
+    return date
+  }
+  function add(){
+
+}
+  function addSeance(){
+    let titre = document.getElementById("titreSeance").textContent;
+    let dateseance = document.getElementById("seanceDate").value;
+    let nbplaces = document.getElementById("seancePlaces").value;
+    var sqlDateStr = "2022/08/31 00:00:00";
+
+    addSeances ='http://localhost/projetM1/projet_Netflix/Controleur/addSesam.php';
+    let data = JSON.stringify({
+      idF: name1,
+      titre: titre,
+      idS: "null",
+      date: dateseance,
+      nbplace: nbplaces
+    });
+    console.log("data",data);  
+    fetch(addSeances,
+    {
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: data
+    })
+    .then(function (response) {
+        //console.log('reponse',response  ,"response",response)
+        location.reload();
+        return response;
+    })
+    .then(function (myJson) {
+      console.log(myJson)
+    }).catch(function (error) {
+      console.log("Error: " + error);
+    });
+  }
 </script>

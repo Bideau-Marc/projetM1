@@ -6,9 +6,10 @@
     $titre = $data['titre'];
     $id_serie =$data['idS'];
     $date = $data['date'];
-    $idNbPLACESEDIREHJTREFR = $data['cestlenombredeplacepourlaseancexDokunpeupluslongpourtefaireplaisir'];
-    $request = "INSERT INTO `seance`( `date`, `titre_seance`, `id_film`, `id_serie`, `nb_place`) VALUES ($date,$titre,$id_film,$id_serie,$idNbPLACESEDIREHJTREFR)";
+    $idNbPLACESEDIREHJTREFR = $data['nbplace'];
+    $request = "INSERT INTO `seance`( `date`, `titre_seance`, `id_film`, `id_serie`, `nb_place`) VALUES ('$date','$titre',$id_film,$id_serie,$idNbPLACESEDIREHJTREFR)";
     $response = array();
+    echo $request;
     if ($result=mysqli_query($conn,$request)) {
         echo '{"state":"film ou série Liké"}';
     } 
