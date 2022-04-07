@@ -1,3 +1,0 @@
-select * from film f, favori ff, categorie fff, user ffff where f.id = ff.id_film and f.categorie = fff.id and ffff.id = ff.idUtilisateur and ff.idUtilisateur =12
-select * from serie f, favori ff, categorie fff, user ffff where f.id = ff.id_serie and f.categorie = fff.id and ffff.id = ff.idUtilisateur and ff.idUtilisateur =12;
-select * from film f, favori ff where f.id_film = ff.id_film
