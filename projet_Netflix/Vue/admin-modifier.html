@@ -72,6 +72,17 @@
           </div>
         </div>
 
+        <div id="overlay1" class="overlay">
+          <div id="popup1" class="popup-supprimer bottomdiv">
+            <h2><span id="btnClose" onclick="closeModal1()" class="btnClose">❌</span></h2>
+            <h2  class="black">êtes-vous sûr de supprimer <span id="titresupprimer"></span> de la séance.</h2>
+            <center>              
+            <button class="btnPopup" onclick="closeModal1()">Annuler ❌</button>
+            <button class="btnPopup" id="btnsupprimersur">Enregistrer ⬇️</button>
+            </center>
+          </div>
+        </div>
+
         <a id="enregistrer" onclick="add()" hidden><button class="btn center top">Enregistrer ⬇️</button></a>
       </div>
     </div>
@@ -83,7 +94,7 @@
 </body>
 </html>
 <script>
-  let ancien,dateReservation, image, est_film, lien_image;
+  let ancien,dateReservation, image, est_film, lien_image,idSeance;
 
   var btnPopup = document.getElementById('ajouter');
   var overlay = document.getElementById('overlay');
@@ -96,7 +107,7 @@
     document.getElementById("listeReservation").hidden = false;
     document.getElementById("enregistrer").hidden = false;
     document.getElementById(a).style.backgroundColor = "#ffffff27";
-    let idSeance = document.getElementById(a).value;
+    idSeance = document.getElementById(a).value;
 
     document.getElementById('inputDate').value = date(text);
     document.getElementById("nbplaces").value = places;
@@ -110,7 +121,7 @@
     let data = JSON.stringify({
       idSeance: idSeance
     });
-    console.log("data",data);
+    //console.log("data",data);
     getUserFromSeance = 'http://localhost/projetM1/projet_Netflix/Controleur/getUserFromSeance.php';
   
     fetch(getUserFromSeance,
@@ -127,7 +138,6 @@
         return response.json();
     })
     .then(function (myJson) {
-      console.log(myJson)
       myJson.forEach((element,index) => {
         let btn  = document.createElement('a');
         let p  = document.createElement('p');
@@ -136,39 +146,97 @@
         btn.id='user'+index;
         btn.value = element.id;
         btn.textContent = element.login;
-
+        btn.onclick = function(){
+          supprimerUser(element.id_user,element.id_seance,element.login);
+        };
         btn.append(p);
         document.getElementById('user').append(btn);
       });
               
     })
     .catch(function (error) {
-    console.log("Error: " + error);
-  });
+      console.log("Error: " + error);
+    });
   }
   function deletePersonne(a)
   {
     document.getElementById(a).hidden = true; 
   }
-  function deleteSeance()
+  function deleteSeance(a)
   {
     document.getElementById(this.dateReservation).hidden = true;
     document.getElementById("listeReservation").hidden = true;
-
+    
+    document.getElementById('user').textContent = "";   
+    let data = JSON.stringify({
+      idSeance: idSeance
+    });
+    //console.log("data",data);
+    cancelSeance = 'http://localhost/projetM1/projet_Netflix/Controleur/cancelSeance.php';
+    fetch(cancelSeance,
+    {
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: data
+    })
+    .then(function (response) {
+        //console.log('reponse',response  ,"response",response)
+        return response.json();
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+    });
   }
   function closeModal() {
     overlay.style.display='none';
   }
+  function closeModal1() {
+    document.getElementById('overlay1').style.display='none';
+  }
   function add()
   {
-    var a = document.createElement('a');
-    a.textContent = document.getElementById('addseance').value;
-    a.id = "a7";
-    document.getElementById('listeDate').append(a);
-    a.addEventListener("click", () => {
-      affichageResvesation('a7',a.textContent);
+
+  }
+  function supprimerUser(idUser, idReservation, nom)
+  {
+    document.getElementById('overlay1').style.display='block';
+    document.getElementById('titresupprimer').textContent= nom;
+    let supprimersur = document.getElementById('btnsupprimersur');
+    supprimersur.onclick = function(){
+      supprimerSur(idUser, idReservation);
+    };
+  }
+  function supprimerSur(idUser, idReservation)
+  {
+    //console.log("lzlzl",idUser,idReservation)
+    cancelResa ='http://localhost/projetM1/projet_Netflix/Controleur/cancelResa.php';
+    let data = JSON.stringify({
+      idUser: idUser,
+      idSeance: idReservation
     });
-    overlay.style.display='none';       
+    //console.log("data",data);  
+    fetch(cancelResa,
+    {
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: data
+    })
+    .then(function (response) {
+      console.log('reponse',response)
+      return response.json();
+    })
+    .then(function (myJson) {
+      console.log(myJson)
+        if (myJson.state == "supp") {
+          location.reload();
+        }
+    })
   }
   function modifier() {
     var url = new URL(document.location.href);
@@ -200,7 +268,7 @@
       lien: x,
       type: est_film
     });
-    console.log("data",data);
+    //console.log("data",data);
     modifierFillmUrl = 'http://localhost/projetM1/projet_Netflix/Controleur/modifierFillm.php';
   
     fetch(modifierFillmUrl,
@@ -325,9 +393,7 @@
     console.log(date)
     return date
   }
-  function add(){
 
-}
   function addSeance(){
     let titre = document.getElementById("titreSeance").textContent;
     let dateseance = document.getElementById("seanceDate").value;

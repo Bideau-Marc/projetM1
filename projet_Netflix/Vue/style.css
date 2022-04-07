@@ -540,6 +540,17 @@ input[type=email] {
   height: 100%;
   display:none;
 }
+.popup-supprimer{
+  margin: 10% auto;
+  width : 50%;
+  height: 20%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-color: rgb(255, 255, 255);
+  padding: 1em;
+  border-radius: 5px;
+}
 .popup{
   margin: 10% auto;
   width : 70%;
@@ -598,6 +609,9 @@ a{
 }
 .center{
   margin-left: 42%;
+}
+.black{
+  color: #000000;
 }
 .top{
   margin-top: 40px;
