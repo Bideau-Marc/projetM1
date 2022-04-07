@@ -23,8 +23,7 @@
       </nav>
       
       <nav class="sub-nav">
-        <a href="#"><i class=""></i></a>
-        <a href="#"><i class=""></i></a>
+        <a id="admin" href="admin.html" hidden>admin</a>
         <a href="reserve.html">Compte</a>        
       </nav>      
     </header>
@@ -80,6 +79,9 @@
     </footer>
   </div>
   <script>
+  if (localStorage.getItem("admin") == 1) {
+    document.getElementById("admin").hidden = false;
+  }
   getFilm ='http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php';
   getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id=Dune'
   getSeries = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php';

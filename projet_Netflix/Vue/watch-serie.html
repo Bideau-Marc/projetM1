@@ -23,9 +23,8 @@
       </nav>  
 
       <nav class="sub-nav">
-        <a href="#"><i class=""></i></a>
-        <a href="#"><i class=""></i></a>
-        <a href="./reserve.html">Compte</a>        
+        <a id="admin" href="admin.html" hidden>admin</a>
+        <a href="reserve.html">Compte</a>       
       </nav>      
     </header>
     <!-- END OF HEADER -->
@@ -36,7 +35,7 @@
         <section class="film" id="imgback">
           <h1 class="pitch-title"><span id="titre"></span><a onclick="favori()" id="favori"> ★</a></h1>
           <p class="pitch-subtitle" id="resume"></p>
-          <a href="watch.html"><button class="btn">Reagarder ►</button></a>
+          <button class="btn" onclick="saveURL()">Regarder ►</button>
         </section>
       </div>
       
@@ -95,6 +94,10 @@
 </body>
 </html>
 <script>
+  function saveURL(){
+    localStorage.setItem("url",window.location.href);
+    window.location.replace('player.html');
+  }
   Boolean: favoriBoll = false;
   let ancienbtn, favoriId;
   function reserver(){

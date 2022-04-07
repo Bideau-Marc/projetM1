@@ -20,9 +20,8 @@
         <a href=""></a>
       </nav>
       <nav class="sub-nav">
-        <a href="#"><i class=""></i></a>
-        <a href="#"><i class=""></i></a>
-        <a href="./reserve.html">Compte</a>        
+        <a id="admin" href="admin.html" hidden>admin</a>
+        <a href="reserve.html">Compte</a>     
       </nav>      
     </header>
     <!-- END OF HEADER -->
@@ -39,6 +38,9 @@
 </body>
 </html>
 <script>
+  if (localStorage.getItem("admin") == 1) {
+    document.getElementById("admin").hidden = false;
+  }
   let nbsection=0;
   this.affichage();
   document.getElementById("r2").style.backgroundImage = "url('../assets/super-heros.jpg')";

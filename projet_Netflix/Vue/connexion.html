@@ -60,6 +60,7 @@
     .then(function (myJson) {
         console.log(myJson[0]);
         localStorage.setItem("idUser",myJson[0].id);
+        localStorage.setItem("admin",myJson[0].amin);
         if (myJson[0].state == "permited") {
             document.location.href = "./accueil.html"; 
         }
