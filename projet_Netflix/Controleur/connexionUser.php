@@ -11,11 +11,12 @@ $result = mysqli_query($conn, $request);
 while($row = mysqli_fetch_assoc($result))
     {
       $id = $row['id'];
+      $amdin = $row['admin'];
     }
 if ($result=mysqli_query($conn,$request)) {
     $rowcount=mysqli_num_rows($result);
     if($rowcount>0){
-        echo '[{ "id":'.$id.',"state":"permited"}]';
+        echo '[{ "id":'.$id.',"state":"permited", "amin":'.$amdin.'}]';
     }
     else{
         echo '[{"state":"denied"}]';
