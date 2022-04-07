@@ -92,15 +92,14 @@
     for (let i = 0; i < nb_seance; i++) {
       var nbplaces = document.getElementById("nb"+i).value;
       var idfilm = document.getElementById("bloc"+i).value;
-      
       if (nbplaces != 0) {
           //console.log(nbplaces, idfilm);
           let data = JSON.stringify({
           idUser: localStorage.getItem("idUser"),
-          idSeance: name1,
+          idSeance: idfilm,
           nbPlaceRes: nbplaces
         });
-        console.log("data",data);
+        //console.log("data",data);
         fetch(addSeances,
         {
           headers: {
@@ -111,12 +110,9 @@
           body: data
         })
         .then(function (response) {
-            //console.log('reponse',response  ,"response",response)
-            return response.json();
-        })
-        .then(function (myJson) {
-          console.log("l");
-        })
+          if (response.status == 200) {
+            document.location.href = "./reserve.html"; 
+          }        })
         .catch(function (error) {
           console.log("Error: " + error);
         });
@@ -166,9 +162,9 @@
         a.className ='resever';
         a.id='bloc'+index;
         if (est_film == "film") {
-          a.value = element.id_film;
+          a.value = element.id_seance;
         }else{
-          a.value = element.id_serie;
+          a.value = element.id_seance;
         }
         a.textContent = element.date +"\nnombre de places réservés : ";
         input.className = 'input-nb';
