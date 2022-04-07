@@ -8,8 +8,8 @@
     $request = "DELETE FROM `reservation` WHERE `id_user`='$id' and `id_seance`='$idSeance'";
     $response = array();
     if ($result=mysqli_query($conn,$request)) {
-        echo json_encode("{'state':'supp'}");
+        echo '{"state":"supp"}';
     } 
-    else echo "{'state':'pas marché xD'}";
+    else echo '{"state":"pas marché xD"}';
 
 ?>
