@@ -35,7 +35,7 @@
         $categorie = 'amour';
         $cpt = $amour;
     }
-    $recommendation = "select * from film f , categorie c where c.id = f.categorie and c.nom = '$categorie'";
+    $recommendation = "select * from film f , categorie c where c.id = f.categorie and c.nom = '$categorie' and f.id not in (select f2.id from film f2, vue v , user u where u.id = '$id' and u.id = v.idUser and v.idFilm= f2.id)";
     $result = mysqli_query($conn, $recommendation);
     while($row = mysqli_fetch_assoc($result))
     {
