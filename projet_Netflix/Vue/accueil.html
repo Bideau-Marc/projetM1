@@ -31,14 +31,17 @@
     
     <!-- MAIN CONTAINER -->
     <section class="main-container" >
+      <h1>Recommendations</h1>
+      <div class="box" id="reco">                          
+      </div>
+
       <div class="location" id="home">
         <h1>Films</h1>
         <div class="box" id="films">      
         </div>
-      </div>
-      
+      </div>      
 
-      <h1 id="Films">Séries</h1>
+      <h1>Séries</h1>
       <div class="box" id="series">
                           
       </div>
@@ -85,6 +88,8 @@
   getFilm ='http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php';
   getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id=Dune'
   getSeries = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php';
+  reco = 'http://localhost/projetm1/projet_Netflix/Controleur/Recomendation.php';
+
   fetch(getFilm)
   .then(function (response) {
       //console.log('reponse',getFilm,"response",response)
@@ -125,6 +130,30 @@
   .catch(function (error) {
     console.log("Error: " + error);
   });
+  // Recommendations
+  let data = JSON.stringify({
+    id: localStorage.getItem("idUser"),
+  });
+  //console.log("data",data);  
+  fetch(reco,
+  {
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: data
+  })
+  .then(function (response) {
+    //console.log('reponse',getFilm,"response",response)
+    return response.json();
+  })
+  .then(function (myJson) {
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+
   creerFilm = 'http://localhost/projetM1/projet_Netflix/Controleur/creerFilm.php' //en post avec un json {"titre":"nouveaufilmcreergracealapi","lien_vid":"lienvidcreergracealapi","cat":2, "res":"rescreergracealapi","lien":"liencreergracealapi"}
   connexion = 'http://localhost/projetM1/projet_Netflix/Controleur/connexionUser.php';
   inscription = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php?admin=1';

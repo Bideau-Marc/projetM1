@@ -43,8 +43,8 @@
           <br>
           <a><button class="btn" onclick="modifier()">Enregistrer ⬇️</button></a>
           <a><button class="btn">Supprimer ❌</button></a><br>
-          <a href="watch.html"><button class="btn">Reagarder ►</button></a>
-          <a href="reserver.html"><button class="btn">Réserver 📅</button></a>
+          <a onclick="watch()"><button class="btn">Reagarder ►</button></a>
+          <a onclick="reserver()"><button class="btn">Réserver 📅</button></a>
         </section>
       </div>
       
@@ -82,7 +82,7 @@
           </div>
         </div>
 
-        <a id="enregistrer" onclick="add()" hidden><button class="btn center top">Enregistrer ⬇️</button></a>
+        <a id="enregistrer" onclick="modifierSeance()" hidden><button class="btn center top">Enregistrers ⬇️</button></a>
       </div>
     </div>
 
@@ -103,6 +103,12 @@
   btnPopup.addEventListener('click',openMoadl);
   function openMoadl() {
     overlay.style.display='block';
+  }
+  function reserver(){
+    window.location.href ="reserver.html?idfilm=" + name1;
+  }
+  function watch(){
+    window.location.href ="watch.html?film=" + name1;
   }
   function affichageResvesation(a,text,places)
   {
@@ -198,9 +204,41 @@
   function closeModal1() {
     document.getElementById('overlay1').style.display='none';
   }
-  function add()
+  function modifierSeance()
   {
-
+    let date = document.getElementById('inputDate').value;
+    let nbplacesseances = document.getElementById('nbplaces').value;
+    console.log(idSeance,"lzlzl",date,";",nbplacesseances)
+    modifierResa ='http://localhost/projetM1/projet_Netflix/Controleur/modifierSeance.php';
+    let data = JSON.stringify({
+      idSeance: idSeance,
+      dateSeance: date,
+      nbPlace: nbplacesseances
+    });
+    //console.log("data",data);  
+    fetch(modifierResa,
+    {
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: data
+    })
+    .then(function (response) {
+      console.log('reponse',response)
+      if (response.state == "seance updaté") {
+          location.reload();
+        }
+      return response.json();
+    })
+    .then(function (myJson) {
+      console.log(myJson)
+      if (myJson.state == "seance updaté") {
+          location.reload();
+        }
+      
+    })
   }
   function supprimerUser(idUser, idReservation, nom)
   {

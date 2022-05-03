@@ -8,7 +8,7 @@
     $idFilm = $data['idFilm'];
     $idSerie = $data['idSerie'];
     $nbPlace = $data['nbPlace'];
-    $request = "UPDATE `seance` SET `date`='$dateSeance',`titre_seance`='$titreSeance',`id_film`='$idFilm',`id_serie`='$idSerie',`nb_place`='$nbPlace' WHERE id_seance = '$idSeance'";
+    $request = "UPDATE `seance` SET `date`='$dateSeance',`nb_place`='$nbPlace' WHERE id_seance = '$idSeance'";
     $response = array();
     if ($result=mysqli_query($conn,$request)) {
         echo '{"state":"seance updaté"}';
