@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 03 mai 2022 à 10:58
+-- Généré le : jeu. 05 mai 2022 à 14:04
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -30,15 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `vue` (
   `id` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
-  `idFilm` int(11) NOT NULL
+  `idFilm` int(11) DEFAULT NULL,
+  `id_serie` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `vue`
 --
 
-INSERT INTO `vue` (`id`, `idUser`, `idFilm`) VALUES
-(1, 12, 1);
+INSERT INTO `vue` (`id`, `idUser`, `idFilm`, `id_serie`) VALUES
+(1, 12, 1, NULL),
+(2, 12, 0, 1),
+(3, 12, NULL, 2);
 
 --
 -- Index pour les tables déchargées
@@ -58,7 +61,7 @@ ALTER TABLE `vue`
 -- AUTO_INCREMENT pour la table `vue`
 --
 ALTER TABLE `vue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

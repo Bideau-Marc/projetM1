@@ -22,8 +22,4 @@ if ($result=mysqli_query($conn,$request)) {
         echo '[{"state":"denied"}]';
     }
 } 
-
-
- 
-
 ?>
