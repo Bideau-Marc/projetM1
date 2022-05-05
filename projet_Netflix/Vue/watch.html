@@ -168,7 +168,7 @@
       idF: name1,
       ids: "null"
     });
-    console.log("data",data);  
+    //console.log("data",data);  
     fetch(addfavori,
     {
       headers: {
@@ -183,7 +183,7 @@
       return response.json();
     })
     .then(function (myJson) {
-      console.log(myJson);
+      //console.log(myJson);
       if(myJson.state == "commentaire créé"){
         document.getElementById('btncomment').textContent = "Enregistré";
         setTimeout(() => {
