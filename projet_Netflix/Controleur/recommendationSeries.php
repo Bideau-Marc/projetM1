@@ -40,7 +40,7 @@
     }
     echo $categorie;
     echo $requete;
-    $recommendation = "select * from serie f , categorie c where c.id = f.categorie and c.nom = '$categorie' and f.id not in (select f2.id from serie f2, vue v , user u where u.id = '$id' and u.id = v.idUser and v.idFilm= f2.id);";
+    $recommendation = "select f.* from serie f , categorie c where c.id = f.categorie and c.nom = '$categorie' and f.id not in (select f2.id from serie f2, vue v , user u where u.id = '$id' and u.id = v.idUser and v.idFilm= f2.id);";
     $result = mysqli_query($conn, $recommendation);
     while($row = mysqli_fetch_assoc($result))
     {
