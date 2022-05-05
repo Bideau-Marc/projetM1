@@ -83,6 +83,7 @@
         <h2 class="commentaire">Commentaire</h2>
         <Textarea id="commentaireid" rows="5" class="commentaire" placeholder="Faire un commentaire."></Textarea>
         <div><button id="btncomment" class="btn center" onclick="commentaire()">Commenté</button> </div>
+        <div id="idtoutcommentaire"></div>
       </div>
     </section>
     <!-- END OF MAIN CONTAINER -->
@@ -94,6 +95,9 @@
 </body>
 </html>
 <script>
+  if (localStorage.getItem("admin") == 1) {
+    document.getElementById("admin").hidden = false;
+  }
   function saveURL(){
     localStorage.setItem("url",window.location.href);
     window.location.replace('player.html');
@@ -303,6 +307,7 @@
   .catch(function (error) {
     console.log("Error: " + error);
   });
+
   //get favori
   getFavori = 'http://localhost/projetm1/projet_Netflix/Controleur/getFav.php';
   let data = JSON.stringify({
@@ -332,6 +337,39 @@
         favoriId= element.id;
       }
     });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+
+  //commentaire récuperer
+  getcommentaire ='http://localhost/projetM1/projet_Netflix/Controleur/getComm.php';
+  let datacom = JSON.stringify({
+    ids: idseries,
+    idf: 0
+  });
+  //console.log("data",datacom);  
+  fetch(getcommentaire,
+  {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+    method: "POST",
+    body: datacom
+  })
+  .then(function (response) {
+    //console.log('reponse',response )
+    return response.json();
+  })
+  .then(function (myJson) {
+    console.log(myJson);
+    myJson.forEach((element,index) => {
+      //console.log(element,"gg");
+      let h3 = document.createElement('h3');
+      h3.textContent = element.commentaire +" - "+ element.login;
+      document.getElementById("idtoutcommentaire").append(h3);
+  });
   })
   .catch(function (error) {
     console.log("Error: " + error);
