@@ -149,6 +149,16 @@
     return response.json();
   })
   .then(function (myJson) {
+    //console.log(myJson,"ip",myJson);
+    myJson.forEach(element => {
+      //console.log(element.lien_image,"jesuisle5emeElmeent");
+      let a  = document.createElement('a');
+      let img  = document.createElement('img');
+      img.src = element.lien;
+      a.append(img);
+      a.href='watch.html'+"?film="+element.id;
+      document.getElementById("reco").append(a);
+    });
   })
   .catch(function (error) {
     console.log("Error: " + error);

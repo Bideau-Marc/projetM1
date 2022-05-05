@@ -16,10 +16,10 @@ require("connexion.php");
     else{
       if($id==null){
         if($type == 'serie'){
-          $query = "SELECT * FROM seance s, serie se where s.id_serie = se.id and s.date  >=NOW()";
+          $query = "SELECT * FROM seance s, serie se where s.id_serie = se.id and s.date  >=NOW() ORDER BY s.titre_seance";
         }
         else{
-          $query = "SELECT * FROM seance s, film f where s.id_film = f.id and s.date  >=NOW()" ;
+          $query = "SELECT * FROM seance s, film f where s.id_film = f.id and s.date  >=NOW() ORDER BY s.titre_seance" ;
         }
       }
       else{
