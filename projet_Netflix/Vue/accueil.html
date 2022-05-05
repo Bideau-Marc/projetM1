@@ -89,6 +89,7 @@
   getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id=Dune'
   getSeries = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php';
   reco = 'http://localhost/projetm1/projet_Netflix/Controleur/Recomendation.php';
+  recoserie = 'http://localhost/projetm1/projet_Netflix/Controleur/recommendationSeries.php';
 
   fetch(getFilm)
   .then(function (response) {
@@ -97,8 +98,8 @@
   })
   .then(function (myJson) {
     //console.log(myJson,"ip",myJson);
-    myJson.forEach(element => {
-      //console.log(element,"jesuisle5emeElmeent");
+    myJson.forEach((element,index) => {
+      //console.log(index,"gg");
       let a  = document.createElement('a');
       let img  = document.createElement('img');
       img.src = element.lien;
@@ -151,7 +152,7 @@
   .then(function (myJson) {
     //console.log(myJson,"ip",myJson);
     myJson.forEach(element => {
-      //console.log(element.lien_image,"jesuisle5emeElmeent");
+      //console.log(element,"jesuisle5emeElmeent");
       let a  = document.createElement('a');
       let img  = document.createElement('img');
       img.src = element.lien;
@@ -163,13 +164,44 @@
   .catch(function (error) {
     console.log("Error: " + error);
   });
+  // Recommendations series
+  let datareco = JSON.stringify({
+    id: localStorage.getItem("idUser"),
+  });
+  fetch(recoserie,
+  {
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: datareco
+  })
+  .then(function (response) {
+    //console.log('reponse',getFilm,"response",response)
+    return response.json();
+  })
+  .then(function (myJson) {
+    console.log(myJson,"ip",myJson);
+    myJson.forEach(element => {
+      console.log(element,"jesuisle5emeElmeent");
+      let a  = document.createElement('a');
+      let img  = document.createElement('img');
+      img.src = element.lien;
+      a.append(img);
+      a.href='watch-serie.html'+"?series="+element.id;
+      document.getElementById("reco").append(a);
+    });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
 
   creerFilm = 'http://localhost/projetM1/projet_Netflix/Controleur/creerFilm.php' //en post avec un json {"titre":"nouveaufilmcreergracealapi","lien_vid":"lienvidcreergracealapi","cat":2, "res":"rescreergracealapi","lien":"liencreergracealapi"}
   connexion = 'http://localhost/projetM1/projet_Netflix/Controleur/connexionUser.php';
   inscription = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php?admin=1';
   data = JSON.stringify({name:"marc",mdp:"m1"});
-  getEpisodes ='http://localhost/projetM1/projet_Netflix/Controleur/getEpisodes.php?id=2'
-  
+  getEpisodes ='http://localhost/projetM1/projet_Netflix/Controleur/getEpisodes.php?id=2' 
   
 
   </script>

@@ -81,8 +81,8 @@
 
       <div class="commentaire-fond top">
         <h2 class="commentaire">Commentaire</h2>
-        <Textarea rows="5" class="commentaire" placeholder="Faire un commentaire."></Textarea>
-        <div><button class="btn center">Commenté</button> </div>
+        <Textarea id="commentaireid" rows="5" class="commentaire" placeholder="Faire un commentaire."></Textarea>
+        <div><button id="btncomment" class="btn center" onclick="commentaire()">Commenté</button> </div>
       </div>
     </section>
     <!-- END OF MAIN CONTAINER -->
@@ -160,6 +160,46 @@
       });
     }
   }
+
+  function commentaire()
+  {
+    addfavori ='http://localhost/projetM1/projet_Netflix/Controleur/addComm.php';
+   
+    let commentaire = document.getElementById('commentaireid').value;
+    let data = JSON.stringify({
+      com: commentaire,
+      idU: localStorage.getItem("idUser"),
+      idF: "null",
+      ids: idseries
+    });
+    //console.log("data",data);  
+    fetch(addfavori,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+      method: "POST",
+      body: data
+    })
+    .then(function (response) {
+      //console.log('reponse',response )
+      return response.json();
+    })
+    .then(function (myJson) {
+      //console.log(myJson);
+      if(myJson.state == "commentaire créé"){
+        document.getElementById('btncomment').textContent = "Enregistré";
+        setTimeout(() => {
+          location.reload();
+        }, 2000);        
+      }
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+    });
+  }
+
   function saison(btn, urlimage)
   {
     document.getElementById(btn).style.backgroundColor = "#ffffff80";
