@@ -1,8 +1,16 @@
 <?php
-require('connexion.php');
-    $id=$_GET['id'];
+    require('connexion.php');
+    $data = json_decode(file_get_contents('php://input'),true);
+    $ids= $data['ids'];
+    $idF= $data['idf'];
+    if($idF==0){
+        $query = "SELECT  * FROM `commentaire` c, user u, serie f  WHERE u.id = c.id_user and c.id_serie = f.id and f.id='$ids' limit 2 ";
+    }
+    else{
+        $query = "SELECT  * FROM `commentaire` c, user u, film f  WHERE u.id = c.id_user and c.id_film = f.id and f.id='$idF' limit 2 ";
+
+    }
     global $conn;
-    $query = "SELECT top* FROM `commentaire` c, user u  WHERE u.id = c.id_user limit 2";
     $response = array();
     $result = mysqli_query($conn, $query);
     while($row = mysqli_fetch_assoc($result))
