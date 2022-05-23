@@ -19,7 +19,8 @@
                     <textarea rows="8" cols="52" class="commentaire-fond" placeholder="Entrer votre demande"></textarea>
                 </div>
                 <div class="btnCo">
-                    <a href="accueil.html"><div class="btn-primary">Envoyer</div></a>
+                    <a><div class="btn-primary" onclick="contact()">Envoyer</div></a>
+                    <p id="message"></p>
                 </div>
                 <div class="help">
                     <div class="signup">
@@ -36,4 +37,42 @@
     function closeContact() {
         window.history.back();
     }
+    function contact()
+  {
+    contact ='http://localhost/projetM1/projet_Netflix/Controleur/contact.php';
+   
+    let commentaire = document.getElementById('commentaireid').value;
+    let data = JSON.stringify({
+      com: commentaire,
+      idU: localStorage.getItem("idUser"),
+      idF: "null",
+      ids: idseries
+    });
+    //console.log("data",data);  
+    fetch(contact,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+      method: "POST",
+      body: data
+    })
+    .then(function (response) {
+      //console.log('reponse',response )
+      return response.json();
+    })
+    .then(function (myJson) {
+      //console.log(myJson);
+      if(myJson.state == "commentaire créé"){
+        document.getElementById('message').textContent = "Message envoyé !";
+        setTimeout(() => {
+            window.location.href ="accueil.html";
+        }, 2000);        
+      }
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+    });
+  }
 </script>
