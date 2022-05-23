@@ -40,51 +40,17 @@
       </div>
       
       <div class="location top" id="home">
-        <div id="btn">
-           <!-- <button class="btn-delete espacebas" id="S1" onclick="saison('S1')">Saison 1</button>
-          <button class="btn-delete espacebas" id="S2" onclick="saison('S2')">Saison 2</button>
-          <button class="btn-delete espacebas" id="S3" onclick="saison('S3')">Saison 3</button>  -->
-        </div>
-        <div id="affichage">
-          <!-- <div id="Saison1">
-            <div class="box" id="episode1">
-              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 1</a>
-              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 2</a>
-              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 3</a>
-              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 4</a>
-              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 5</a>
-              <a href=""><img src="../assets/stranger-things-S01.jpg" > Episode 6</a>
-            </div>
-          </div> 
-          <div id="Saison2" hidden>
-            <div class="box" id="episode1">
-              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 1</a>
-              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 2</a>
-              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 3</a>
-              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 4</a>
-              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 5</a>
-              <a href=""><img src="../assets/stranger-things-S02.jpg" > Episode 6</a>
-            </div>
-          </div>            
-          <div id="Saison3" hidden>
-            <div class="box">
-              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 1</a>
-              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 2</a>
-              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 3</a>
-              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 4</a>
-              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 5</a>
-              <a href=""><img src="../assets/stranger-things-S03.jpg" > Episode 6</a>
-            </div>
-          </div> -->
-        </div>
+        <div id="btn"></div>
+        <div id="affichage"></div>
       </div>
 
       <div class="commentaire-fond top">
         <h2 class="commentaire">Commentaire</h2>
         <Textarea id="commentaireid" rows="5" class="commentaire" placeholder="Faire un commentaire."></Textarea>
         <div><button id="btncomment" class="btn center" onclick="commentaire()">Commenté</button> </div>
-        <div id="idtoutcommentaire"></div>
       </div>
+      <div class="commentaire-fond top" id="idtoutcommentaire"></div>
+
     </section>
     <!-- END OF MAIN CONTAINER -->
 
@@ -367,6 +333,7 @@
     myJson.forEach((element,index) => {
       //console.log(element,"gg");
       let h3 = document.createElement('h3');
+      h3.style.textAlign ='center';
       h3.textContent = element.commentaire +" - "+ element.login;
       document.getElementById("idtoutcommentaire").append(h3);
   });
