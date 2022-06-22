@@ -14,7 +14,7 @@
     <!-- HEADER -->
     <header>
       <div class="netflixLogo">
-        <a id="logo" href="accueil.html#home"><img src="../assets/netflix_violet.png" alt="Logo Image"></a>
+        <a id="logo" href="accueil.html#home"><img class="logo1" src="../assets/logo.png" alt="Logo Image"></a>
       </div>
       <nav class="main-nav">                
         <a href="accueil.html">Films/Séries</a>
@@ -24,7 +24,12 @@
 
       <nav class="sub-nav">
         <a id="admin" href="admin.html" hidden>admin</a>
-        <a href="reserve.html">Compte</a>       
+        <a href="reserve.html">Compte</a>
+        <a onclick="deco()">
+          <svg xmlns="http://www.w3.org/2000/svg" style="width: 1.2rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        </a>   
       </nav>      
     </header>
     <!-- END OF HEADER -->
@@ -53,34 +58,6 @@
         <div class="box">        
         </div>
       </div>
-      
-      <!-- END OF MAIN CONTAINER -->
-
-      <!-- LINKS -->
-      <section class="link">
-      <div class="logos">
-        <a href="#"><i class="fab fa-facebook-square fa-2x logo"></i></a>
-        <a href="#"><i class="fab fa-instagram fa-2x logo"></i></a>
-        <a href="#"><i class="fab fa-twitter fa-2x logo"></i></a>
-        <a href="#"><i class="fab fa-youtube fa-2x logo"></i></a>
-      </div>
-      <div class="sub-links">
-        <ul>
-        <li><a href="#">Audio and Subtitles</a></li>
-        <li><a href="#">Audio Description</a></li>
-        <li><a href="#">Help Center</a></li>
-        <li><a href="#">Gift Cards</a></li>
-        <li><a href="#">Media Center</a></li>
-        <li><a href="#">Investor Relations</a></li>
-        <li><a href="#">Jobs</a></li>
-        <li><a href="#">Terms of Use</a></li>
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Legal Notices</a></li>
-        <li><a href="#">Corporate Information</a></li>
-        <li><a href="#">Contact Us</a></li>
-        </ul>
-    </div>
-    </section>
 
     <footer>
       <a href="./contact.html" class="flooter">Contact ☎️</a>
@@ -283,4 +260,10 @@
   .catch(function (error) {
     console.log("Error: " + error);
   });
+
+  function deco()
+  {
+    localStorage.clear();
+    document.location.href = "./connexion.html";
+  }
 </script>

@@ -14,7 +14,7 @@
     <!-- HEADER -->
     <header>
       <div class="netflixLogo">
-        <a id="logo" href="accueil.html#home"><img src="../assets/netflix_violet.png" alt="Logo Image"></a>
+        <a id="logo" href="accueil.html#home"><img class="logo1" src="../assets/logo.png" alt="Logo Image"></a>
       </div>
       <nav class="main-nav">                
         <a href="accueil.html">Films/Séries</a>
@@ -24,7 +24,12 @@
 
       <nav class="sub-nav">
         <a id="admin" href="admin.html" hidden>admin</a>
-        <a href="reserve.html">Compte</a>       
+        <a href="reserve.html">Compte</a>
+        <a onclick="deco()">
+          <svg xmlns="http://www.w3.org/2000/svg" style="width: 1.2rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        </a>     
       </nav>      
     </header>
     <!-- END OF HEADER -->
@@ -35,7 +40,7 @@
         <section class="film" id="imgback">
           <h1 class="pitch-title"><span id="titre"></span><a onclick="favori()" id="favori"> ★</a></h1>
           <p class="pitch-subtitle" id="resume"></p>
-          <button class="btn" onclick="saveURL()">Regarder ►</button>
+          <button class="btn" onclick="saveURL()" id="btnregarder">Regarder ►</button>
         </section>
       </div>
       
@@ -67,6 +72,10 @@
   function saveURL(){
     localStorage.setItem("url",window.location.href);
     window.location.replace('player.html');
+  }
+  function btnregarder(episode){
+    document.getElementById("btnregarder").textContent = "Regarder ►"+episode ;
+
   }
   Boolean: favoriBoll = false;
   let ancienbtn, favoriId;
@@ -172,9 +181,10 @@
 
   function saison(btn, urlimage)
   {
+    document.getElementById("btnregarder").textContent = "Regarder ►";
     document.getElementById(btn).style.backgroundColor = "#ffffff80";
     if (ancienbtn != null) {
-        document.getElementById(ancienbtn).style.backgroundColor = "#ffffff27";
+      document.getElementById(ancienbtn).style.backgroundColor = "#ffffff27";
     }
     ancienbtn = btn;
     if (btn == 'S1') {
@@ -268,7 +278,12 @@
         default:
           break;
       }
+      a.addEventListener("click", () => {
+        this.btnregarder(element.nom);
+      });
   });
+  console.log('la');
+  this.saison('S1')
   })
   .catch(function (error) {
     console.log("Error: " + error);
@@ -341,4 +356,9 @@
   .catch(function (error) {
     console.log("Error: " + error);
   });
+  function deco()
+  {
+    localStorage.clear();
+    document.location.href = "./connexion.html";
+  }
 </script>

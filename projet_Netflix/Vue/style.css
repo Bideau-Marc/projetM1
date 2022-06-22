@@ -98,10 +98,13 @@ html, body {
   box-sizing: border-box;
   line-height: 1.4;
 }
-
-img {
-  max-width: 100%;
+a img{
+  width: 170px;
   height: 245px;
+}
+.logo1 {
+  width: 60px;
+  height: 60px;
 }
 
 .wrapper {
@@ -228,10 +231,6 @@ header {
 
 .logos a{
   padding: 10px;
-}
-
-.logo {
-  color: var(--dark);
 }
 
 
