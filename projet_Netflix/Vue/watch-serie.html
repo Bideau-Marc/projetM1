@@ -280,6 +280,7 @@
       }
       a.addEventListener("click", () => {
         this.btnregarder(element.nom);
+        localStorage.setItem('idEpisode',element.id);
       });
   });
   console.log('la');
