@@ -5,7 +5,7 @@ ECHO empty($_GET["admin"]);
   
 switch($request_method)
   {
-    case 'GET':
+    case 'POST':
       if(!empty($_GET["admin"]))
       {
         // Récupérer un seul produit
@@ -25,7 +25,6 @@ switch($request_method)
 
 function inscriptionUser(){
     global $conn;
-  echo'la';
     $data = json_decode(file_get_contents('php://input'),true);
     $username = $data['name'];
     $mdp = $data['mdp'];
