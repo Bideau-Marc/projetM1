@@ -44,7 +44,14 @@
         mdp: mdp
     });
     console.log("data",data)
-    inscriptionurl = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php';
+    var url = new URL(document.location.href);
+    var adminture = url.searchParams.get("admin");
+    console.log("data",adminture)
+    if(adminture == 1){
+        inscriptionurl = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php?admin=2';
+    }else{
+        inscriptionurl = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php';
+    }
     
     fetch(inscriptionurl,
     {
@@ -60,10 +67,8 @@
         return response.json();
     })
     .then(function (myJson) {
-        localStorage.setItem("idUser",myJson[0].id);
-        localStorage.setItem("admin",myJson[0].amin);
         if (myJson.state == "inscrit") {
-            document.location.href = "./accueil.html"; 
+            document.location.href = "./connexion.html"; 
         }
     })
     

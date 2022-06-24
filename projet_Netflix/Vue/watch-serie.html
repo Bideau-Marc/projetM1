@@ -39,7 +39,8 @@
       <div>
         <section class="film" id="imgback">
           <h1 class="pitch-title"><span id="titre"></span><a onclick="favori()" id="favori"> ★</a></h1>
-          <p class="pitch-subtitle" id="resume"></p>
+          <p class="pitch-subtitle p-resume" id="resume"></p>
+          <p class="pitch-subtitle p-resume" id="auteur"></p>
           <button class="btn" onclick="saveURL()" id="btnregarder">Regarder ►</button>
         </section>
       </div>
@@ -221,6 +222,7 @@
       document.getElementById("imgback").style.backgroundImage = "url("+element.lien+")";
       document.getElementById("titre").textContent += element.titre;
       document.getElementById("resume").textContent = element.resume;
+      document.getElementById("auteur").textContent = "Acteurs : "+element.auteur;
   });
   })
   .catch(function (error) {

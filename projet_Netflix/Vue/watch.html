@@ -40,6 +40,7 @@
         <section class="film" id="imgback">
           <h1 class="pitch-title"><span id="titre"></span><a onclick="favori()" id="favori"> ★</a></h1>
           <p class="pitch-subtitle p-resume" id="resume">Description</p>
+          <p class="pitch-subtitle p-resume" id="auteur"></p>
           <button class="btn" onclick="saveURL()">Regarder ►</button>
           <a onclick="reserver()"><button class="btn">Réserver 📅</button></a>
         </section>
@@ -54,8 +55,8 @@
       <div class="commentaire-fond top" id="idtoutcommentaire"></div>
         
       <div class="location" id="home">
-        <h1 id="home">Vos recommendations</h1>
-        <div class="box">        
+        <h1 id="home">Vos recommendations 💡</h1>
+        <div class="box" id="reco">        
         </div>
       </div>
 
@@ -263,6 +264,7 @@
       document.getElementById("imgback").style.backgroundImage = "url("+element.lien+")";
       document.getElementById("titre").textContent = element.titre;
       document.getElementById("resume").textContent = element.resume;
+      document.getElementById("auteur").textContent = "Acteurs : "+element.auteur;
     });
   })
   .catch(function (error) {
