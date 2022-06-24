@@ -66,11 +66,15 @@
 </body>
 </html>
 <script>
+    
+      localStorage.setItem("fos","film");
+     
   if (localStorage.getItem("admin") == 1) {
     document.getElementById("admin").hidden = false;
   }
   function saveURL(){
     localStorage.setItem("url",window.location.href);
+
     window.location.replace('player.html');
   }
   Boolean: favoriBoll = false;
@@ -176,6 +180,7 @@
   }
   var url = new URL(document.location.href);
   var name1 = url.searchParams.get("film");
+  localStorage.setItem('idFilm',name1);
   getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id='+name1;
   fetch(getFilmPrecis)
   .then(function (response) {

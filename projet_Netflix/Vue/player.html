@@ -9,17 +9,49 @@
 
 </head>
 <body>
-    <div class="">
-        <div class="child1"><img src='../assets/croix.png' width="25" height="25" onclick="back()"></div>
-        <div class="child1 child2">
-          <video width="100%$=" height="100%" controls>
-            <source src="../IMG_0151 (1).MP4" type="video/MP4">
+    <div>
+        <div><img src='../assets/croix.png' class="img2" onclick="back()"></div>
+        <div id="player" class="child1 child2">
+          <video width="100%" height="100%" controls>
+            <source  src="../IMG_0151 (1).MP4" type="video/MP4">
           </video>
+
         </div>
+        <iframe id="src" hidden  width="100%" height="88%" name="demo">      </iframe> 
+
       </div>
     
-    <!-- <iframe width="1520" height="553" src="https://www.youtube.com/embed/JK9dTUBf1bI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>     -->
-    <script> 
+      
+   <script> 
+      console.log(localStorage.getItem('fos'))
+      let url;
+      if(localStorage.getItem('fos')==='film'){
+        url ='http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id='+localStorage.getItem('idFilm') 
+      }
+      else if(localStorage.getItem('fos')==="serie"){
+        url = 'http://localhost/projetm1/projet_Netflix/Controleur/getEpisodE.php?id='+localStorage.getItem('idEpisode')
+      }
+    console.log(url)
+    fetch(url)
+    .then(function (response) {
+      //console.log('reponse',getFilm,"response",response)
+    return response.json();
+    })
+    .then(function (myJson) {
+    console.log(myJson,"ip",myJson);
+    console.log(myJson[0].lien_video,"ee");
+    if(myJson[0].lien_video !=null || myJson[0].lien_video != "undefined"){
+      console.log('lien',myJson[0].lien_video, localStorage.getItem('url  '))
+      document.getElementById('player').hidden = true
+      myJson[0].lien_video = myJson[0].lien_video.replace('watch?v=', "embed/");
+      console.log(document.getElementById('src').src)
+      document.getElementById('src').src=myJson[0].lien_video
+      document.getElementById('src').hidden = false
+    }
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
         function back(){
           window.location.replace(localStorage.getItem('url'))
         }
