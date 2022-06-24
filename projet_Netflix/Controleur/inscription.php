@@ -44,7 +44,7 @@ function inscriptonAdmin($admin=''){
     $data = json_decode(file_get_contents('php://input'),true);
     $username = $data['name'];
     $mdp = $data['mdp'];
-    $request = "INSERT INTO `user`(`login`, `mot_de_passe`, `admin`) VALUES ('$username', '$mdp','$admin')";
+    $request = "INSERT INTO `user`(`login`, `mot_de_passe`, `admin`) VALUES ('$username', '$mdp',1)";
     $response = array();
     if ($result=mysqli_query($conn,$request)) {
         echo '{"state":"inscrit"}';
