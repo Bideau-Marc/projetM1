@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Netflix</title>
+  <title>Moving</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
@@ -122,7 +122,7 @@
     document.getElementById(a).style.backgroundColor = "#ffffff27";
     idSeance = document.getElementById(a).value;
 
-    document.getElementById('inputDate').value = date(text);
+    document.getElementById('inputDate').value = formatDateInput(text);
     document.getElementById("nbplaces").value = places;
     this.dateReservation = a;
     if (this.ancien != null) {
@@ -405,7 +405,7 @@
         }else{
           a.value = element.id_seance;
         }
-        a.textContent = element.date +"\nnombre de places disponibles : " + element.nb_place;
+        a.textContent = this.formatDateInput(element.date) +"\nnombre de places disponibles : " + element.nb_place;
         p.className = '';
         p.id = 'nb'+index;
         
@@ -420,23 +420,14 @@
     .catch(function (error) {
       console.log("Error: " + error);
     });
-  function date(a){
-    let j, m, y,date,h,mim;
-    y= a[0];
-    y += a[1];
-    y += a[2];
-    y += a[3];
-    m = a[5];
-    m += a[6];
-    j = a[8];
-    j += a[9];
-    h = a[11];
-    h += a[12];
-    mim = a[14];
-    mim += a[15];
-    date = y+"-"+m+"-"+j+"T"+h+":"+mim;
-    console.log(date)
-    return date
+    function formatDateInput(date){
+    let jours,mois,annee;
+    jours = date.substring(8,10);
+    mois = date.substring(5,7);
+    annee = date.substring(0,4);
+    heure = date.substring(11,13);
+    min = date.substring(14,16);
+    return jours +"/"+mois+"/"+annee +" "+heure+":"+min;
   }
 
   function addSeance(){

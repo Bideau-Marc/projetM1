@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Netflix</title>
+  <title>Moving</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
@@ -65,11 +65,10 @@
   if (localStorage.getItem("admin") == 1) {
     document.getElementById("admin").hidden = false;
   }
-  getFilm ='http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php';
-  getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id=Dune'
-  getSeries = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php';
-  reco = 'http://localhost/projetm1/projet_Netflix/Controleur/Recomendation.php';
-  recoserie = 'http://localhost/projetm1/projet_Netflix/Controleur/recommendationSeries.php';
+  getFilm ='http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=film';
+  getSeries = 'http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=serie';
+  reco = 'http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=reco';
+  recoserie = 'http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=recoserie';
 
   fetch(getFilm)
   .then(function (response) {
@@ -176,12 +175,6 @@
   .catch(function (error) {
     console.log("Error: " + error);
   });
-
-  creerFilm = 'http://localhost/projetM1/projet_Netflix/Controleur/creerFilm.php' //en post avec un json {"titre":"nouveaufilmcreergracealapi","lien_vid":"lienvidcreergracealapi","cat":2, "res":"rescreergracealapi","lien":"liencreergracealapi"}
-  connexion = 'http://localhost/projetM1/projet_Netflix/Controleur/connexionUser.php';
-  inscription = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php?admin=1';
-  data = JSON.stringify({name:"marc",mdp:"m1"});
-  getEpisodes ='http://localhost/projetM1/projet_Netflix/Controleur/getEpisodes.php?id=2' 
   
   function deco()
   {

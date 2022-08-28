@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Netflix</title>
+  <title>Moving</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
@@ -53,7 +53,7 @@
   {
     console.log(r)
     document.getElementById(r).hidden = true;
-    cancelResa ='http://localhost/projetm1/projet_Netflix/Controleur/cancelResa.php';
+    cancelResa ='http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=cancelResa';
     let data = JSON.stringify({
       idUser: localStorage.getItem("idUser"),
       idSeance: id_seance
@@ -80,7 +80,7 @@
   }
   function affichage()
   {
-    getResa ='http://localhost/projetm1/projet_Netflix/Controleur/getResa.php';
+    getResa ='http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=getResa';
     let data = JSON.stringify({
       idUser: localStorage.getItem("idUser"),
       idSeance: 1
@@ -115,7 +115,7 @@
       section.id='section'+index;
       titre.textContent = element.titre_seance;
       titre.className="title"
-      description.textContent = element.date;
+      description.textContent = this.formatDateInput(element.date);
       description.className="pitch-subtitle";
       nbplaces.textContent = element.nombre_place_reserve+ " places réservés 💺";
       nbplaces.className="pitch-subtitle";
@@ -137,5 +137,14 @@
   {
     localStorage.clear();
     document.location.href = "./connexion.html";
+  }
+  function formatDateInput(date){
+    let jours,mois,annee;
+    jours = date.substring(8,10);
+    mois = date.substring(5,7);
+    annee = date.substring(0,4);
+    heure = date.substring(11,13);
+    min = date.substring(14,16);
+    return jours +"/"+mois+"/"+annee +" à "+heure+"h"+min;
   }
 </script>

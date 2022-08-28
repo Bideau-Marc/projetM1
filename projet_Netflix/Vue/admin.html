@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Netflix</title>
+  <title>Moving</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
@@ -141,7 +141,7 @@
         type: film
       });
       console.log("data",image)
-      creerFilmUrl = 'http://localhost/projetM1/projet_Netflix/Controleur/creerFilm.php';
+      creerFilmUrl = 'http://localhost/projetM1/projet_Netflix/Controleur/api.php?entity=creerFilm';
     
       fetch(creerFilmUrl,
       {
@@ -164,7 +164,7 @@
       })
     }
 
-  getFilm ='http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php';
+  getFilm ='http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=film';
   fetch(getFilm)
   .then(function (response) {
       //console.log('reponse',getFilm,"response",response)
@@ -186,7 +186,7 @@
     console.log("Error: " + error);
   });
 
-  getSeries = 'http://localhost/projetm1/projet_Netflix/Controleur/getSeries.php';
+  getSeries = 'http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=serie';
   fetch(getSeries)
   .then(function (response) {
       //console.log('reponse',getFilm,"response",response)

@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Netflix</title>
+  <title>Moving</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
@@ -95,7 +95,7 @@
   }
   function enregistrer()
   {
-    addSeances ='http://localhost/projetM1/projet_Netflix/Controleur/addResa.php';
+    addSeances ='http://localhost/projetM1/projet_Netflix/Controleur/api.php?entity=addResa';
     for (let i = 0; i < nb_seance; i++) {
       var nbplaces = document.getElementById("nb"+i).value;
       var idfilm = document.getElementById("bloc"+i).value;
@@ -138,7 +138,7 @@
       name1 = url.searchParams.get("idserie");
       est_film="serie";
     }
-  getSeances ='http://localhost/projetM1/projet_Netflix/Controleur/getSeance.php';
+  getSeances ='http://localhost/projetM1/projet_Netflix/Controleur/api.php?entity=getSeance';
   let data = JSON.stringify({
       id: name1,
       type: est_film,
@@ -159,6 +159,9 @@
         return response.json();
     })
     .then(function (myJson) {
+      if (myJson.length == 0) {
+        this.setError404();
+      }
       nb_seance = myJson.length;
       document.getElementById("imgback").style.backgroundImage = "url("+myJson[0].lien+")";
       document.getElementById("titre").textContent = myJson[0].titre_seance;
@@ -174,7 +177,7 @@
         }else{
           a.value = element.id_seance;
         }
-        a.textContent = element.date +"\nnombre de places réservés : ";
+        a.textContent = this.formatDateInput(element.date) +"\nnombre de places réservés : ";
         input.className = 'input-nb';
         input.type ='number';
         input.id = 'nb'+index;
@@ -197,5 +200,18 @@
   {
     localStorage.clear();
     document.location.href = "./connexion.html";
+  }
+  function setError404()
+  {
+    document.location.href = "./errer.html";
+  }
+  function formatDateInput(date){
+    let jours,mois,annee;
+    jours = date.substring(8,10);
+    mois = date.substring(5,7);
+    annee = date.substring(0,4);
+    heure = date.substring(11,13);
+    min = date.substring(14,16);
+    return jours +"/"+mois+"/"+annee +" "+heure+":"+min;
   }
 </script>

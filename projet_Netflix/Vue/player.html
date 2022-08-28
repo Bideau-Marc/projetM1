@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Netflix</title>
+  <title>Moving</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script> -->
@@ -26,10 +26,10 @@
       console.log(localStorage.getItem('fos'))
       let url;
       if(localStorage.getItem('fos')==='film'){
-        url ='http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id='+localStorage.getItem('idFilm') 
+        url ='http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=film&id='+localStorage.getItem('idFilm') 
       }
       else if(localStorage.getItem('fos')==="serie"){
-        url = 'http://localhost/projetm1/projet_Netflix/Controleur/getEpisodE.php?id='+localStorage.getItem('idEpisode')
+        url = 'http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=getEpisodE&id='+localStorage.getItem('idEpisode')
       }
     console.log(url)
     fetch(url)

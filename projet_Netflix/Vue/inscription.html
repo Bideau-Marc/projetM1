@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
 <link rel="stylesheet" href="style.css">
-<title>Netflix</title>
+<title>Moving</title>
 </head>
 <body>
 <div class="showcase">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="help">                    
                     <div class="signup">
-                        <p>Déjà un compte sur Netflix ?</p>
+                        <p>Déjà un compte sur Moving ?</p>
                         <a href="connexion.html">Connexion</a>
                     </div>
                 </div>      
@@ -48,9 +48,9 @@
     var adminture = url.searchParams.get("admin");
     console.log("data",adminture)
     if(adminture == 1){
-        inscriptionurl = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php?admin=2';
+        inscriptionurl = 'http://localhost/projetM1/projet_Netflix/Controleur/api.php?entity=inscription&admin=2';
     }else{
-        inscriptionurl = 'http://localhost/projetM1/projet_Netflix/Controleur/inscription.php';
+        inscriptionurl = 'http://localhost/projetM1/projet_Netflix/Controleur/api.php?entity=inscription';
     }
     
     fetch(inscriptionurl,

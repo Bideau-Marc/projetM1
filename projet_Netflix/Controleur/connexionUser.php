@@ -4,8 +4,10 @@ global $conn;
 $data = json_decode(file_get_contents('php://input'),true);
 $username = $data['name'];
 $mdp = $data['mdp'];
+$password = $data['mdp'];
+$hashed_password = hash('md5', $password);
 $id;
-$request = "select * from user where login ='$username' and mot_de_passe='$mdp'";
+$request = "select * from user where login ='$username' and mot_de_passe='$hashed_password'";
 $response = array();
 $result = mysqli_query($conn, $request);
 while($row = mysqli_fetch_assoc($result))

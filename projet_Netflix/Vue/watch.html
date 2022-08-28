@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Netflix</title>
+  <title>Moving</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
@@ -85,8 +85,8 @@
   }
 
 
-  reco = 'http://localhost/projetm1/projet_Netflix/Controleur/Recomendation.php';
-  recoserie = 'http://localhost/projetm1/projet_Netflix/Controleur/recommendationSeries.php';
+  reco = 'http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=reco';
+  recoserie = 'http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=recoserie';
   // Recommendations
   let recodata = JSON.stringify({
     id: localStorage.getItem("idUser"),
@@ -155,8 +155,8 @@
 
   function favori()
   {
-    addfavori ='http://localhost/projetM1/projet_Netflix/Controleur/addFavori.php';
-    removefavori ='http://localhost/projetM1/projet_Netflix/Controleur/removeFavori.php';
+    addfavori ='http://localhost/projetM1/projet_Netflix/Controleur/api.php?entity=addFavori';
+    removefavori ='http://localhost/projetM1/projet_Netflix/Controleur/api.php?entity=removeFavori';
 
     if (favoriBoll == true) {
       let data = JSON.stringify({
@@ -213,7 +213,7 @@
   }
   function commentaire()
   {
-    addfavori ='http://localhost/projetM1/projet_Netflix/Controleur/addComm.php';
+    addfavori ='http://localhost/projetM1/projet_Netflix/Controleur/api.php?entity=addComm';
    
     let commentaire = document.getElementById('commentaireid').value;
     let data = JSON.stringify({
@@ -252,14 +252,17 @@
   var url = new URL(document.location.href);
   var name1 = url.searchParams.get("film");
   localStorage.setItem('idFilm',name1);
-  getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/getFilms.php?id='+name1;
+  getFilmPrecis = 'http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=film&id='+name1;
   fetch(getFilmPrecis)
   .then(function (response) {
-      //console.log('reponse',getFilm,"response",response)
+    //console.log('reponse',response.length,"response",response)       
     return response.json();
   })
   .then(function (myJson) {
-    //console.log(myJson,"ip",myJson);
+    console.log(myJson,"ip",myJson);
+    if (myJson.length == 0) {
+      this.setError404();
+    } 
     myJson.forEach(element => {
       document.getElementById("imgback").style.backgroundImage = "url("+element.lien+")";
       document.getElementById("titre").textContent = element.titre;
@@ -271,7 +274,7 @@
     console.log("Error: " + error);
   });
   //get favori
-  getFavori = 'http://localhost/projetm1/projet_Netflix/Controleur/getFav.php';
+  getFavori = 'http://localhost/projetm1/projet_Netflix/Controleur/api.php?entity=getFav';
   let data = JSON.stringify({
     idUser: localStorage.getItem("idUser"),
     idSeance: "null",
@@ -305,7 +308,7 @@
   });
 
   //commentaire récuperer
-  getcommentaire ='http://localhost/projetM1/projet_Netflix/Controleur/getComm.php';
+  getcommentaire ='http://localhost/projetM1/projet_Netflix/Controleur/api.php?entity=getComm';
   let datacom = JSON.stringify({
     ids: "null",
     idf: name1
@@ -343,4 +346,9 @@
     localStorage.clear();
     document.location.href = "./connexion.html";
   }
+  function setError404()
+  {
+    document.location.href = "./errer.html";
+  }
+ 
 </script>

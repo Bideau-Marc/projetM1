@@ -28,11 +28,13 @@ function inscriptionUser(){
     $data = json_decode(file_get_contents('php://input'),true);
     $username = $data['name'];
     $mdp = $data['mdp'];
-    $request = "INSERT INTO `user`(`login`, `mot_de_passe`) VALUES ('$username', '$mdp')";
+    $password = $data['mdp'];
+    $hashed_password = hash('md5', $password);
+    $request = "INSERT INTO `user`(`login`, `mot_de_passe`) VALUES ('$username', '$hashed_password')";
     $response = array();
     if ($result=mysqli_query($conn,$request)) {
         echo '{"state":"inscrit"}';
-    } 
+    }
     else echo '{"state":"déja existant"}';
     
 }
