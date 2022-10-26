@@ -217,7 +217,7 @@
     return response.json();
   })
   .then(function (myJson) {
-    //console.log(myJson,"ip",myJson);
+    console.log(myJson,"ip",myJson);
     if (myJson.length == 0) {
       this.setError404();
     } 
